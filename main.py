@@ -85,3 +85,4 @@ os.system('clear')
 #os.system("cls")
 #Resultat ausgeben
 print("\nDas Training ist beendet\nRESULTAT\nRichtige Sätze: " + str(Richtig) + "\nFehlgeschlagene Versuche: " +str(Falsch) + "\nFehlerquote: " +(str(round(Falsch/(Falsch+Richtig)*100))+"%") + "\nAnschläge pro Minute: "+str(round((int(Anschläge)/(Zeit/60)))))
+input()
