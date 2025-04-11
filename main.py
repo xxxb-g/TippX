@@ -32,9 +32,9 @@ Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "
 #Willkommensbotschaft/Einführung senden
 print("Willkommen zu Tipp X! Du wirst aufgefordert werden, Zahlen, Buchstaben, Wörter und Sätze einzugeben. Du musst jede Eingabe mit der Entertaste bestätigen. Viel Spaß!")
 #Level abfragen
-Level = input("ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n18: Alle Zeichen\nWelches Level möchtest du trainieren? ")
+Level = input("ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|\)\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? ")
 #Failsafe
-while Level != "1" and Level != "2" and Level != "3" and Level != "18":
+while Level != "1" and Level != "2" and Level != "3" and Level!="4" and Level!="5" and Level!="6" and Level!="7" and Level!="8" and Level!="9" and Level!="10" and Level!="11" and Level!="12" and Level!="13" and Level!="14" and Level!="15" and Level!="16" and Level!="17" and Level!="18" and Level!="19" and Level!="20":
     Level = input("Ungültige Eingabe. Bitte tippe die entsprechende Nummer! ")
 Level = int(Level)-1
 #Variabeln (zurück)setzen
