@@ -1,5 +1,5 @@
 # TippX
-![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png?raw=true)
+![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
 Zehnfingerschreiben lernen
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
