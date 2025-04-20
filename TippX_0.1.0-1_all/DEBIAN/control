@@ -1,0 +1,9 @@
+Package: TippX
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python3, sl, zenity
+Maintainer: Benedikt Goldhahn <xxxbGamer@proton.me>
+Homepage: https://github.com/xxxb-g/TippX
+Description: Das deutsche Zehnfinger-Schreibsystem lernen

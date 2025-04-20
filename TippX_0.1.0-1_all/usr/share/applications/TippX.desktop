@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=TippX
+Comment=Deutsches 10-Finger-Schreibsystem lernen
+Exec=TippX
+Icon=/usr/share/icons/TippX-Logo.png
+Terminal=false
+Categories=Utility;Application;
+Path=
+StartupNotify=true
+
