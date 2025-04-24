@@ -1,8 +1,8 @@
 # TippX
-![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
 Zehnfingerschreiben lernen
+![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
 
-Dies sind die Dateien zum Bauen der Installationsdateien.
+Dies sind die Dateien zum Bauen der Installationsdateien für Debian-basierte Linux-Distributionen.
 Du kannst sie mit "dpkg-deb --build [Ordnername]" bauen.
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
