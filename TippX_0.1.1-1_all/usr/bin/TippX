@@ -1,2 +1,2 @@
 #!/bin/bash
-./TippX.sh
+/usr/bin/TippX.sh

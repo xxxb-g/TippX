@@ -1,2 +1,2 @@
 #!/bin/bash
-gio launch ./TippX.desktop
+gio launch /usr/bin/TippX.desktop
