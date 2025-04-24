@@ -1,6 +1,25 @@
 # TippX
-![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
 Zehnfingerschreiben lernen
+![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
+
+# Installation
+## Vom Source-Code
+`git clone -b Releases https://github.com/xxxb-g/TippX.git`
+
+`cd TippX`
+
+`dpkg-deb --build [Ordnername]`
+
+`sudo dpkg -i [Ordnername].deb`
+## Von der vorbereiteten Installationsdatei
+`wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
+`sudo dpkg -i TippX_0.1.0-1_all.deb`
+Oder für Menschen, die nicht das Terminal nutzen wollen:
+Lade die gewünschte Version auf https://github.com/xxxb-g/TippX/releases/ herunter und öffne sie.
+
+
+
+
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
 
