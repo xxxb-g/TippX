@@ -4,6 +4,7 @@ Zehnfingerschreiben lernen
 
 # Installation
 ## Vom Source-Code
+### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
 `cd TippX`
@@ -11,13 +12,29 @@ Zehnfingerschreiben lernen
 `dpkg-deb --build [Ordnername]`
 
 `sudo dpkg -i [Ordnername].deb`
+### Für Windows
+
+`curl.exe --output TippX.py https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/main/main.py`
+
+`pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i C:\Users\goldhahn.lukas.GYFSCHILLER.001\Downloads\Logo.png TippX.py`
+
+`cd dist`
+
+`TippX.exe`
+
 ## Von der vorbereiteten Installationsdatei
+### Für Linux
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
-Oder für Menschen, die nicht das Terminal nutzen wollen:
-Lade die gewünschte Version auf https://github.com/xxxb-g/TippX/releases/ herunter und öffne sie.
 
+### Für Windows
 
+`curl.exe --output TippX.exe https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.exe`
+
+`TippX.exe`
+
+### Für Menschen, die nicht das Terminal/cmd nutzen wollen:
+Lade die gewünschte Version auf  der [Release-Seite](https://github.com/xxxb-g/TippX/releases/) herunter und öffne sie.
 
 
 
