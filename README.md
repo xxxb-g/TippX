@@ -16,7 +16,7 @@ Zehnfingerschreiben lernen
 
 `curl.exe --output TippX.py https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/main/main.py`
 
-`pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i C:\Users\goldhahn.lukas.GYFSCHILLER.001\Downloads\Logo.png TippX.py`
+`pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i Logo.png TippX.py`
 
 `cd dist`
 
