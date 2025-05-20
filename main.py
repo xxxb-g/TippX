@@ -5,9 +5,13 @@ import time
 import math
 import os
 #Bildschirm leeren
-os.system('clear')
-#Windoof Variante:
-#os.system("cls")
+def clear_screen():
+    # Überprüfen des Betriebssystems
+    if os.name == 'nt':  # Windoof
+        os.system('cls')
+    else:  # Linux und andere
+        os.system('clear')
+clear_screen()
 #für jedes LevelListe von Sätzen definieren
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
          ["enden jenen kenne den denken senden senken","lenken jens elan senf ölen allen danke dekan faden","nadel laken lösen laden fassen lassen fallen","klaffen allenfalls denen kennen nennen denn ende","jene enkel essen denke jenes könne jeden lesen","nasen dessen essens öffnen landen fanden fallendes","jedenfalls können seele dann es an kann je jede jedes","edles des ans elf and alle fand dank sank sense","nelke esel lesende danken flennen nase ekeln","ölkanne klassen flanke löffel jeans köln kassen","skandalös kekse kaskade dösen edel fesseln kasse dösen","enden fesseln senden senf faden fassen denen jene","könne essens jedenfalls an edles alle skandalös","danken ekeln jenen senken ölen nadel lassen kennen","enkel jeden öffnen können kann des fand sense","flennen ölkanne löffel jeans edel kenne kasse lenken","allen laken fallen nennen essen lesen landen seele","je ans dank kekse nelke klassen köln den jens","danke lösen klaffen denn denke nasen fanden dann","jede elf sank kaskade esel nase flanke kassen","denken elan dekan laden allenfalls ende jenes","dessen fallendes es jedes and lesende"],
@@ -79,10 +83,7 @@ if Tipp == Satz:
     Richtig += 1
     Anschläge += len(str(Tipp))
     print("Richtig.")
-#Bildschirm leeren
-os.system('clear')
-#Windoof Variante:
-#os.system("cls")
+clear_screen() #Bildschirm leeren
 #Resultat ausgeben
 print("\nDas Training ist beendet\nRESULTAT\nRichtige Sätze: " + str(Richtig) + "\nFehlgeschlagene Versuche: " +str(Falsch) + "\nFehlerquote: " +(str(round(Falsch/(Falsch+Richtig)*100))+"%") + "\nAnschläge pro Minute: "+str(round((int(Anschläge)/(Zeit/60)))))
 input()
