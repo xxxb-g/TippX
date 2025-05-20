@@ -14,6 +14,8 @@ Zehnfingerschreiben lernen
 `sudo dpkg -i [Ordnername].deb`
 ### Für Windows
 
+benötigt pyinstaller (installieren mit `pip install pyinstaller`)
+
 `curl.exe --output TippX.py https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/main/main.py`
 
 `curl.exe --output Logo https://raw.githubusercontent.com/xxxb-g/TippX/main/Logo.png`
