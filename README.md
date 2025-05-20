@@ -42,10 +42,14 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 `curl.exe --output Logo https://raw.githubusercontent.com/xxxb-g/TippX/main/Logo.png`
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 `pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.ico TippX.py`
 =======
 `pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.png TippX.py`
 >>>>>>> ef837d1 (Update README.md)
+=======
+`pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.ico TippX.py`
+>>>>>>> 502dfbf (fixed)
 
 `cd dist`
 
