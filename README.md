@@ -4,14 +4,36 @@ Zehnfingerschreiben lernen
 
 # Installation
 ## Vom Source-Code
-### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
+### Für Linux
+
+#### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
+
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
 `cd TippX`
 
+`cd Linux`
+
+`cd Debian-basiert`
+
 `dpkg-deb --build [Ordnername]`
 
 `sudo dpkg -i [Ordnername].deb`
+
+#### Für alle anderen Linux-Distributionen
+
+`git clone -b Releases https://github.com/xxxb-g/TippX.git`
+
+`cd TippX`
+
+`cd Linux`
+
+`cd Distributionsunabhängig`
+
+`cd TippX_0.1.0-1_all`
+
+`sudo ./Installer.sh`
+
 ### Für Windows
 
 benötigt pyinstaller (installieren mit `pip install pyinstaller`)
@@ -27,8 +49,9 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 `TippX.exe`
 
 ## Von der vorbereiteten Installationsdatei
-### Für Linux
+### Für Debian-basierte Linux-Distributionen
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
+
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
 
 ### Für Windows
@@ -40,7 +63,21 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 ### Für Menschen, die nicht das Terminal/cmd nutzen wollen:
 Lade die gewünschte Version auf  der [Release-Seite](https://github.com/xxxb-g/TippX/releases/) herunter und öffne sie.
 
+# Deinstallation
+## Für Linux
+### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
+`sudo dpkg --purge TippX`
+### Für Linux allgemein
+Lade den Uninstaller herunter:
+`wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/Releases/Linux/Distributionsunabh%C3%A4ngig/TippX_0.1.0-1_all/Uninstaller.sh`
+`chmod +x Uninstaller.sh`
+`sudo ./Uninstaller.sh`
+`rm Uninstaller.sh`
+## Für Windows
+die heruntergeladene bzw. gebaute Datei löschen
 
+<br>
+<br>
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
 
