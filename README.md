@@ -50,6 +50,13 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 
 ## Von der vorbereiteten Installationsdatei
 ### Für Debian-basierte Linux-Distributionen
+
+Dies in /etc/apt/sources.list einfügen: `deb [trusted=yes] https://apt.fury.io/xxxb/ /` (das fügt mein APT-Repo hinzu)
+
+und dann `sudo apt update && sudo apt install tippx`
+
+Oder die Installationsdatei direkt herunterladen (keine auto-Updates)
+
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
 
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
