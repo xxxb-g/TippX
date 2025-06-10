@@ -24,6 +24,7 @@ Zehnfingerschreiben lernen
 
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
+<<<<<<< HEAD
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
 
 #### Für alle anderen Linux-Distributionen mit make (Unterstützt auch lokale Installation ohne Root-Rechte)
@@ -32,6 +33,17 @@ Zehnfingerschreiben lernen
 `cd TippX`
 
 `sudo make` oder wenn es nur für den lokalen Nutzer installiert werden soll und dementsprechend keine Root-Rechte benötigt: `make install_noroot` 
+=======
+`cd TippX`
+
+`cd Linux`
+
+`cd Distributionsunabhängig`
+
+`cd TippX_0.1.0-1_all`
+
+`sudo ./Installer.sh`
+>>>>>>> b1c6026 (README.md angepasst)
 
 ### Für Windows
 
@@ -57,6 +69,7 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 
 ## Von der vorbereiteten Installationsdatei
 ### Für Debian-basierte Linux-Distributionen
+<<<<<<< HEAD
 
 Dies in /etc/apt/sources.list einfügen: `deb [trusted=yes] https://apt.fury.io/xxxb/ /` (das fügt mein APT-Repo hinzu)
 
@@ -64,6 +77,8 @@ und dann `sudo apt update && sudo apt install tippx`
 
 Oder die Installationsdatei direkt herunterladen (keine auto-Updates)
 
+=======
+>>>>>>> b1c6026 (README.md angepasst)
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
 
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
@@ -80,6 +95,7 @@ Lade die gewünschte Version auf  der [Release-Seite](https://github.com/xxxb-g/
 # Deinstallation
 ## Für Linux
 ### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
+<<<<<<< HEAD
 
 `sudo dpkg --purge TippX`
 
@@ -115,6 +131,20 @@ die heruntergeladene bzw. gebaute Datei löschen
 <br>
 
 ***
+=======
+`sudo dpkg --purge TippX`
+### Für Linux allgemein
+Lade den Uninstaller herunter:
+`wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/Releases/Linux/Distributionsunabh%C3%A4ngig/TippX_0.1.0-1_all/Uninstaller.sh`
+`chmod +x Uninstaller.sh`
+`sudo ./Uninstaller.sh`
+`rm Uninstaller.sh`
+## Für Windows
+die heruntergeladene bzw. gebaute Datei löschen
+
+<br>
+<br>
+>>>>>>> b1c6026 (README.md angepasst)
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
 
