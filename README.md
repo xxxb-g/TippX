@@ -2,8 +2,16 @@
 Zehnfingerschreiben lernen
 ![Logo](https://github.com/xxxb-g/TippX/blob/main/Logo.png)
 
-Dies sind die Dateien zum Bauen der Installationsdateien für Debian-basierte Linux-Distributionen.
+Dies sind die Dateien zum Bauen der Installationsdateien.
+
+Für Debian-basierte Distros sind sie im Ordner /Linux/Debian-basiert/ zu finden.
+
 Du kannst sie mit "dpkg-deb --build [Ordnername]" bauen.
+
+Für alle anderen Linux Distros gibt es die distributionsunabhängige (Un)Installer.
+
+<br>
+<br>
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
 
