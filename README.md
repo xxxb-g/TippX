@@ -34,6 +34,13 @@ Zehnfingerschreiben lernen
 
 `sudo ./Installer.sh`
 
+#### Für alle anderen Linux-Distributionen mit make
+`git clone https://github.com/xxxb-g/TippX.git`
+
+`cd TippX`
+
+`sudo make`
+
 ### Für Windows
 
 benötigt pyinstaller (installieren mit `pip install pyinstaller`)
@@ -80,6 +87,11 @@ Lade den Uninstaller herunter:
 `chmod +x Uninstaller.sh`
 `sudo ./Uninstaller.sh`
 `rm Uninstaller.sh`
+### Für Linux allgemein mit Make
+Lade die Makefile herunter:
+`wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/main/Makefile`
+
+`sudo make uninstall`
 ## Für Windows
 die heruntergeladene bzw. gebaute Datei löschen
 
