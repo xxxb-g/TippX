@@ -1,5 +1,5 @@
 git clone https://github.com/xxxb-g/TippX.git ./tmp
-cd ./temp
+cd ./tmp
 cp main.py /usr/bin/TippX.py
 cat > /usr/bin/TippX.sh << 'ENDE'
 #!/bin/bash
