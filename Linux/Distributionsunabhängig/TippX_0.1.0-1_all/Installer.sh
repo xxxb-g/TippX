@@ -29,7 +29,7 @@ cp Logo.png /usr/share/icons/TippX-Logo.png
 cat > TippX.1 << 'ENDE'
 (C) Copyright 2025 Benedikt Goldhahn <xxxbGamer@proton.me>
 TippX ist ein Programm zum lernen des 10-Finger-Schreibsystems. Zum Starten musst du nur TippX in deinem Startmenu suchen und öffnen. Alternativ kanst du den Befehl "TippX" im Terminal ausführen.
-Am Anfang wirst du gefragt, welches Level du trainieren willst. Gib die entsprechende Zahl (.B. 1) ein. Danach wirst du gefragt, wie lange du trainieren willst. Gib auch hier eine Zahl ein. Nun beginnt das Training. Tippe den Satz, der auf dem Bildschirm angezeigt wird und bestätige mit der Enter-Taste. Nach Ablauf der Zeit wird dir eine Statistik angezeigt.
+Am Anfang wirst du gefragt, welches Level du trainieren willst. Gib die entsprechende Zahl (z.B. 1) ein. Danach wirst du gefragt, wie lange du trainieren willst. Gib auch hier eine Zahl ein. Nun beginnt das Training. Tippe den Satz, der auf dem Bildschirm angezeigt wird und bestätige mit der Enter-Taste. Nach Ablauf der Zeit wird dir eine Statistik angezeigt.
 ENDE
 gzip TippX.1
 cp TippX.1.gz /usr/share/man/man1/TippX.1.gz
