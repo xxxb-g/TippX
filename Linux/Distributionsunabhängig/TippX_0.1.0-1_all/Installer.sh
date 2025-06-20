@@ -35,3 +35,8 @@ gzip TippX.1
 cp TippX.1.gz /usr/share/man/man1/TippX.1.gz
 cd ..
 rm -rf ./tmp
+cd ..
+cd ..
+cd ..
+cd ..
+rm -rf TippX
