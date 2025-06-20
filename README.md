@@ -25,6 +25,7 @@ Zehnfingerschreiben lernen
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
 
 #### Für alle anderen Linux-Distributionen mit make (Unterstützt auch lokale Installation ohne Root-Rechte)
@@ -54,6 +55,9 @@ Zehnfingerschreiben lernen
 `cd ..`
 
 `rm -rf TippX`
+=======
+`sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
+>>>>>>> 1317e66 (README.md)
 
 
 #### Für alle anderen Linux-Distributionen mit make
