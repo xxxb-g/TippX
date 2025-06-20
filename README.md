@@ -45,6 +45,17 @@ Zehnfingerschreiben lernen
 `sudo ./Installer.sh`
 >>>>>>> b1c6026 (README.md angepasst)
 
+`cd ..`
+
+`cd ..`
+
+`cd ..`
+
+`cd ..`
+
+`rm -rf TippX`
+
+
 #### Für alle anderen Linux-Distributionen mit make
 `git clone https://github.com/xxxb-g/TippX.git`
 
