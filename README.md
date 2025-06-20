@@ -22,8 +22,6 @@ Zehnfingerschreiben lernen
 
 #### Für alle anderen Linux-Distributionen
 
-`cd ~`
-
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
