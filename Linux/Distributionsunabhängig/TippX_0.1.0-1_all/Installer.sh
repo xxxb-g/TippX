@@ -36,4 +36,4 @@ cp TippX.1.gz /usr/share/man/man1/TippX.1.gz
 cd ..
 rm -rf ./tmp
 cd ~
-cd -rf TippX
+rm -rf TippX
