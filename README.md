@@ -149,8 +149,11 @@ die heruntergeladene bzw. gebaute Datei löschen
 ### Für Linux allgemein
 Lade den Uninstaller herunter:
 `wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/Releases/Linux/Distributionsunabh%C3%A4ngig/TippX_0.1.0-1_all/Uninstaller.sh`
+
 `chmod +x Uninstaller.sh`
+
 `sudo ./Uninstaller.sh`
+
 `rm Uninstaller.sh`
 ### Für Linux allgemein mit Make
 Lade die Makefile herunter:
