@@ -26,13 +26,12 @@ Zehnfingerschreiben lernen
 
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
 
-
-#### Für alle anderen Linux-Distributionen mit make
+#### Für alle anderen Linux-Distributionen mit make (Unterstützt auch lokale Installation ohne Root-Rechte)
 `git clone https://github.com/xxxb-g/TippX.git`
 
 `cd TippX`
 
-`sudo make`
+`sudo make` oder wenn es nur für den lokalen Nutzer installiert werden soll und dementsprechend keine Root-Rechte benötigt: `make install_noroot` 
 
 ### Für Windows
 
@@ -73,7 +72,9 @@ Lade die gewünschte Version auf  der [Release-Seite](https://github.com/xxxb-g/
 # Deinstallation
 ## Für Linux
 ### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
+
 `sudo dpkg --purge TippX`
+
 ### Für Linux allgemein
 Lade den Uninstaller herunter:
 `wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/Releases/Linux/Distributionsunabh%C3%A4ngig/TippX_0.1.0-1_all/Uninstaller.sh`
@@ -83,11 +84,22 @@ Lade den Uninstaller herunter:
 `sudo ./Uninstaller.sh`
 
 `rm Uninstaller.sh`
+
+ACHTUNG: Wenn es nur für den aktuellen Benutzer installiert wurde, wird ein anderer Uninstaller benötigt:
+
+`wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/Releases/Linux/Distributionsunabh%C3%A4ngig/TippX_0.1.0-1_all/Uninstaller_Noroot.sh`
+
+`chmod +x Uninstaller_Noroot.sh`
+
+`rm Uninstaller_Noroot.sh`
+
 ### Für Linux allgemein mit Make
 Lade die Makefile herunter:
 `wget https://raw.githubusercontent.com/xxxb-g/TippX/refs/heads/main/Makefile`
 
-`sudo make uninstall`
+`sudo make uninstall`  ACHTUNG: Wenn es nur für den aktuellen Benutzer installiert wurde, wird ein anderer Befehl benötigt:  `make uninstall_noroot`
+
+
 ## Für Windows
 die heruntergeladene bzw. gebaute Datei löschen
 
