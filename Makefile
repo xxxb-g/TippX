@@ -35,13 +35,13 @@ install_noroot:
 	cp ./README.md $(HOME)/.local/share/doc/TippX
 	echo 'Du hast die Version 0.1.0 kostenlos installiert. Du kann mich auf https://coindrop.to/TippX unterstützen.' > $(HOME)/.local/share/doc/TippX/Version
 	cp ./Logo.png $(HOME)/.local/share/icons/TippX-Logo.png
-	mkdir -p ~/.local/share/man/man1/
+	mkdir -p $(HOME)/.local/share/man/man1/
 	echo -e "(C) Copyright 2025 Benedikt Goldhahn <xxxbGamer@proton.me>\nTippX ist ein Programm zum lernen des 10-Finger-Schreibsystems. Zum Starten musst du nur TippX in deinem Startmenu suchen und öffnen. Alternativ kanst du den Befehl "TippX" im Terminal ausführen.\nAm Anfang wirst du gefragt, welches Level du trainieren willst. Gib die entsprechende Zahl (z.B. 1) ein. Danach wirst du gefragt, wie lange du trainieren willst. Gib auch hier eine Zahl ein. Nun beginnt das Training. Tippe den Satz, der auf dem Bildschirm angezeigt wird und bestätige mit der Enter-Taste. Nach Ablauf der Zeit wird dir eine Statistik angezeigt." > TippX.1
 	gzip -f TippX.1
-	cp TippX.1.gz ~/.local/share/man/man1/TippX.1.gz
+	cp TippX.1.gz $(HOME)/.local/share/man/man1/TippX.1.gz
 	rm -f TippX.1
 	rm -f TippX.1.gz
 uninstall_noroot:
 	rm -f $(HOME)/bin/TippX.py $(HOME)/bin/TippX.sh $(HOME)/bin/TippX $(HOME)/.local/share/applications/TippX.desktop
 	rm -rf $(HOME)/.local/share/doc/TippX
-	rm -f ~/.local/share/icons/TippX-Logo.png ~/.local/share/man/man1/TippX.1.gz
+	rm -f $(HOME)/.local/share/icons/TippX-Logo.png $(HOME)/.local/share/man/man1/TippX.1.gz
