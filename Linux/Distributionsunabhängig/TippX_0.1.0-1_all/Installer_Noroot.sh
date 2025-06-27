@@ -4,7 +4,7 @@ cp main.py ~/bin/TippX.py
 echo '#!/bin/bash\npython3 ~/bin/TippX.py' > ~/bin/TippX.sh
 chmod +x ~/bin/TippX.sh
 ln -f -s ~/bin/TippX.sh ~/bin/TippX
-echo '[Desktop Entry]\nVersion=1.0\nType=Application\nName=TippX\nComment=Deutsches 10-Finger-Schreibsystem lernen\nExec=TippX\nIcon=~/.local/share/icons/TippX-Logo.png\nTerminal=true\nCategories=Utility;Application;\nStartupNotify=true' > ~/.local/share/applications/TippX.desktop
+echo -e'[Desktop Entry]\nVersion=1.0\nType=Application\nName=TippX\nComment=Deutsches 10-Finger-Schreibsystem lernen\nExec=TippX\nIcon=~/.local/share/icons/TippX-Logo.png\nTerminal=true\nCategories=Utility;Application;\nStartupNotify=true' > ~/.local/share/applications/TippX.desktop
 mkdir -p ~/.local/share/doc/TippX
 cp ./LICENSE ~/.local/share/doc/TippX
 cp ./README.md ~/.local/share/doc/TippX
