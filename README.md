@@ -144,6 +144,13 @@ Lade die Makefile herunter:
 ## Für Windows
 die heruntergeladene bzw. gebaute Datei löschen
 
+# Kontakt
+wenn du Fragen, Hinweise, Verbesserungsvorschläge hast, kannst du das entweder durch die Github-Oberfläche oder durch eine Nachricht an mich herantragen.
+
+E-mail: goldhahn.benedikt@tutanota.de
+
+Mastodon: @xxxb@floss.social
+
 <br>
 <br>
 
