@@ -26,6 +26,28 @@ Zehnfingerschreiben lernen
 
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
 
+#### Als AppImage
+
+`git clone -b Releases https://github.com/xxxb-g/TippX.git`
+
+`cd TippX`
+
+`cd Linux`
+
+`cd Distributionsunabhängig`
+
+`cd AppImage`
+
+`wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage`
+
+`chmod +x appimagetool-x86_64.AppImage`
+
+`ARCH=x86_64 ./appimagetool-x86_64.AppImage AppDir_python TippX.AppImage` 
+
+`# Du kannst bei ARCH= deine eigene Architektur einsetzen, x86_64 ist für 64-Bit. Statt AppDir_python kannst du den gewünschten Ordnernamen einsetzen. Die Unterschiede sind, dass _python nur auf Systemen mit Python geht, _universal auf allen und die _small Variante für ein paar kilobyte weniger Dateigröße.`
+
+Nun kannst du das AppImage mit `./TippX.AppImage` öffnen. Für eine bessere Integration in die Desktopumgebung kann ein Programm wie [GearLever](https://github.com/mijorus/gearlever) genutzt werden.
+
 #### Für alle anderen Linux-Distributionen mit make (Unterstützt auch lokale Installation ohne Root-Rechte)
 `git clone https://github.com/xxxb-g/TippX.git`
 
@@ -59,6 +81,10 @@ Oder die Installationsdatei direkt herunterladen (keine auto-Updates)
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
 
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
+
+### Für andere Linux-Distros
+
+[Hier wird eine Anleitung eingefügt, sobald der Release fertig ist.]
 
 ### Für Windows
 
