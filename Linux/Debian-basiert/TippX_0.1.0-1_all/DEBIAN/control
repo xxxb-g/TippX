@@ -4,6 +4,6 @@ Section: utils
 Priority: optional
 Architecture: all
 Depends: python3, sl
-Maintainer: Benedikt Goldhahn <xxxbGamer@proton.me>
+Maintainer: Benedikt Goldhahn <goldhahn.benedikt@tutanota.de>
 Homepage: https://github.com/xxxb-g/TippX
 Description: Das deutsche Zehnfinger-Schreibsystem lernen
