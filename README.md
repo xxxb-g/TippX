@@ -84,7 +84,19 @@ Oder die Installationsdatei direkt herunterladen (keine auto-Updates)
 
 ### Für andere Linux-Distros
 
-[Hier wird eine Anleitung eingefügt, sobald der Release fertig ist.]
+`wget https://github.com/xxxb-g/TippX/releases/download/v0.1.1/TippX`
+
+`chmod +x TippX`
+
+`./TippX`
+
+oder für AppImage
+
+`wget https://github.com/xxxb-g/TippX/releases/download/v0.1.1/TippX_python.AppImage # oder wenn Python nicht installiert ist wget https://github.com/xxxb-g/TippX/releases/download/v0.1.1/TippX_universal.AppImage`
+
+`chmod +x TippX_python.AppImage`
+
+`./TippX_python.AppImage`
 
 ### Für Windows
 
