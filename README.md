@@ -8,7 +8,7 @@ Für Debian-basierte Distros sind sie im Ordner /Linux/Debian-basiert/ zu finden
 
 Du kannst sie mit "dpkg-deb --build [Ordnername]" bauen.
 
-Für alle anderen Linux Distros gibt es die distributionsunabhängige (Un)Installer.
+Für alle anderen Linux Distros gibt es die distributionsunabhängige (Un)Installer sowie das AppImage und die Ausführbare Datei.
 
 <br>
 <br>
