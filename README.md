@@ -27,8 +27,6 @@ Zehnfingerschreiben lernen
 
 `git clone -b Releases https://github.com/xxxb-g/TippX.git`
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
 
 #### Als AppImage
@@ -54,13 +52,12 @@ Zehnfingerschreiben lernen
 Nun kannst du das AppImage mit `./TippX.AppImage` öffnen. Für eine bessere Integration in die Desktopumgebung kann ein Programm wie [GearLever](https://github.com/mijorus/gearlever) genutzt werden.
 
 #### Für alle anderen Linux-Distributionen mit make (Unterstützt auch lokale Installation ohne Root-Rechte)
-<<<<<<< HEAD
 `git clone https://github.com/xxxb-g/TippX.git`
 
 `cd TippX`
 
 `sudo make` oder wenn es nur für den lokalen Nutzer installiert werden soll und dementsprechend keine Root-Rechte benötigt: `make install_noroot` 
-=======
+
 `cd TippX`
 
 `cd Linux`
@@ -70,7 +67,6 @@ Nun kannst du das AppImage mit `./TippX.AppImage` öffnen. Für eine bessere Int
 `cd TippX_0.1.0-1_all`
 
 `sudo ./Installer.sh`
->>>>>>> b1c6026 (README.md angepasst)
 
 `cd ..`
 
@@ -81,14 +77,12 @@ Nun kannst du das AppImage mit `./TippX.AppImage` öffnen. Für eine bessere Int
 `cd ..`
 
 `rm -rf TippX`
-=======
+
 `sudo ./TippX/Linux/Distributionsunabhängig/TippX_0.1.0-1_all/Installer.sh`
->>>>>>> 1317e66 (README.md)
 
 
 #### Für alle anderen Linux-Distributionen mit make
-=======
->>>>>>> d005572 (der README.md die Installationsmöglichkeit für den aktuellen Benutzer ohne Root-Rechte hinzugefügt)
+
 `git clone https://github.com/xxxb-g/TippX.git`
 
 `cd TippX`
@@ -103,15 +97,11 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 
 `curl.exe --output Logo https://raw.githubusercontent.com/xxxb-g/TippX/main/Logo.png`
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 `pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.ico TippX.py`
-=======
+
 `pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.png TippX.py`
->>>>>>> ef837d1 (Update README.md)
-=======
+
 `pyinstaller --onefile --hidden-import random --hidden-import time --hidden-import math --hidden-import os --hidden-import tkinter -i [Pfad]\Logo.ico TippX.py`
->>>>>>> 502dfbf (fixed)
 
 `cd dist`
 
@@ -119,10 +109,6 @@ benötigt pyinstaller (installieren mit `pip install pyinstaller`)
 
 ## Von der vorbereiteten Installationsdatei
 ### Für Debian-basierte Linux-Distributionen
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> bff343a (README.md verbessert)
 
 Dies in /etc/apt/sources.list einfügen: `deb [trusted=yes] https://apt.fury.io/xxxb/ /` (das fügt mein APT-Repo hinzu)
 
@@ -130,11 +116,6 @@ und dann `sudo apt update && sudo apt install tippx`
 
 Oder die Installationsdatei direkt herunterladen (keine auto-Updates)
 
-<<<<<<< HEAD
-=======
->>>>>>> b1c6026 (README.md angepasst)
-=======
->>>>>>> bff343a (README.md verbessert)
 `wget https://github.com/xxxb-g/TippX/releases/download/v0.1.0/TippX_0.1.0-1_all.deb`
 
 `sudo dpkg -i TippX_0.1.0-1_all.deb`
@@ -167,8 +148,6 @@ Lade die gewünschte Version auf  der [Release-Seite](https://github.com/xxxb-g/
 # Deinstallation
 ## Für Linux
 ### Für Debian-basierte Linux-Distributionen (oder allgemein mit dpkg kompatible Distros)
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 `sudo dpkg --purge TippX`
 
@@ -210,12 +189,6 @@ Mastodon: @xxxb@floss.social
 <br>
 <br>
 
-***
-=======
-=======
-
->>>>>>> d005572 (der README.md die Installationsmöglichkeit für den aktuellen Benutzer ohne Root-Rechte hinzugefügt)
-`sudo dpkg --purge TippX`
 
 ### Für Linux allgemein
 Lade den Uninstaller herunter:
@@ -247,9 +220,6 @@ die heruntergeladene bzw. gebaute Datei löschen
 
 <br>
 <br>
->>>>>>> b1c6026 (README.md angepasst)
-
-***
 
 Wenn dir meine Arbeit gefällt, kannst du mich hier unterstützen:
 
