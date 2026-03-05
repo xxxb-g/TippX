@@ -4,7 +4,7 @@ Zehnfingerschreiben lernen
 
 # Installation
 
-![Der einfache Weg](https://github.com/xxxb-g/TippX/blob/main/README.md#f%C3%BCr-menschen-die-nicht-das-terminalcmd-nutzen-wollen)
+![Download](https://github.com/xxxb-g/TippX/releases/) für Nutzer, die einfach einen Download Button wollen.
 
 ## Vom Source-Code
 ### Für Linux
