@@ -18,16 +18,19 @@ pygame.display.set_caption("TippX")
 # Funktionen
 def reset():
     screen.fill((255,255,255))
-def pgprint(text, font=pygame.font.SysFont('freesans', 48)):
+def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (0,0,0)):
     if type(text) != str:
         return("No String")
     else:
-        return(font.render(text, True, ([0,0,0])))
+        return(font.render(text, True, color))
 
 # Setup new variables
 input_active = True
 Level = ''
+Duration = ''
+duration = ''
 Stage = 1
+clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
          ["enden jenen kenne den denken senden senken","lenken jens elan senf ölen allen danke dekan faden","nadel laken lösen laden fassen lassen fallen","klaffen allenfalls denen kennen nennen denn ende","jene enkel essen denke jenes könne jeden lesen","nasen dessen essens öffnen landen fanden fallendes","jedenfalls können seele dann es an kann je jede jedes","edles des ans elf and alle fand dank sank sense","nelke esel lesende danken flennen nase ekeln","ölkanne klassen flanke löffel jeans köln kassen","skandalös kekse kaskade dösen edel fesseln kasse dösen","enden fesseln senden senf faden fassen denen jene","könne essens jedenfalls an edles alle skandalös","danken ekeln jenen senken ölen nadel lassen kennen","enkel jeden öffnen können kann des fand sense","flennen ölkanne löffel jeans edel kenne kasse lenken","allen laken fallen nennen essen lesen landen seele","je ans dank kekse nelke klassen köln den jens","danke lösen klaffen denn denke nasen fanden dann","jede elf sank kaskade esel nase flanke kassen","denken elan dekan laden allenfalls ende jenes","dessen fallendes es jedes and lesende"],
          ["frei drei rein rief drin einer kreis darin","reise risse freie reine realisieren deiner dieser","kinder lieder seiner keiner leider friede freien","rinnen kreise leiser feiern nieder innere reinen","reisen riefen derlei inneren kleiner kindern","frieden liefern radikal einander niederen friedens","allerlei kleinere radikale kleineren radikalen","kassieren aneinander dir irre freier erinnere erinnern","keinerlei definieren kandidieren in er derer die der","nie ein sie ins redner rinnen dar irren klarer","anderer fördern fiel ideal niesen eid iris riss","reifen seife fieser diesel kreisel jener ranken","inder föderal fernreise frieren frisieren drinnen","feiner erde irland klirren erlösen riese denkerin","franken körner karin sören reis siri senfei kreisend","krise rinne rinnsal ski keller eile sissi filiale","frei einer freie kinder friede feiern riefen","frieden friedens radikalen freier kandidieren der","redner anderer rinne riss diesel inder frieren","irland denkerin franken senfei filiale drei kreis","reine lieder freien nieder derlei liefern allerlei","kassieren erinnere in nie rinnen fördern rinnsal ski","keller reifen frisieren klirren körner reis","kreisend rein darin realisieren seiner rinnen innere","inneren radikal kleinere aneinander erinnern er ein","dar niesen seife kreisel drinnen karin siri","krise eile rief reise deiner keiner kreise fiel","reinen kleiner einander radikale dir keinerlei","derer sie irren jener föderal feiner erlösen sören","sissi drin risse dieser leider leiser ideal reisen","kindern niederen kleineren irre definieren die ins","klarer eid iris fieser ranken fernreise erde riese"],
@@ -63,13 +66,7 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
     if Stage == 1:
-        Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|\)\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
-        #Text = "ABC\n123"
-        for i in range(len(Text.split("\n"))):
-            text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
-            screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
-
-        if input_active:
+        while input_active:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
@@ -81,8 +78,43 @@ while running:
                     else:
                         if input_active:
                             Level += event.unicode
+            level = pgprint("Deine Eingabe: "+Level, pygame.font.SysFont('freesans', 20), (200, 0, 0))
+            reset()
+            screen.blit(level, (0,0))
+            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|\)\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
+            for i in range(len(Text.split("\n"))):
+                text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+                screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+            pygame.display.flip()
         else:
-            Stage = 2
+            Stage += 1
+
+    elif Stage == 2:
+        Text = "Wie lange möchtest du trainieren?"
+        for i in range(len(Text.split("\n"))):
+            text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+            screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+        input_active = True
+        while input_active:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        if Duration.isnumeric():
+                            if int(Duration) >= 1:
+                                input_active = False
+                                Stage += 1
+                    elif event.key == pygame.K_BACKSPACE:
+                        Duration = Duration[:-1]
+                    else:
+                        if input_active:
+                            Duration += event.unicode
+            duration = pgprint("Deine Eingabe: "+Duration, pygame.font.SysFont('freesans', 20), (200, 0, 0))
+            screen.blit(duration, (0,0))
+            screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+            pygame.display.flip()
+            reset()
+    elif Stage == 3:
+        pass
 
     # Stopbildschirm
     #screen.fill(ROT)
