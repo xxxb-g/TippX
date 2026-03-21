@@ -1,7 +1,6 @@
 # All rights reserved for now.
 import random
 import time
-
 import pygame
 # Initialize Pygame
 pygame.init()
@@ -40,7 +39,7 @@ duration = ''
 Input = ''
 Punkte = 0
 Stage = 1
-stop = False
+CTRL = [False, time.time()]
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
          ["enden jenen kenne den denken senden senken","lenken jens elan senf ölen allen danke dekan faden","nadel laken lösen laden fassen lassen fallen","klaffen allenfalls denen kennen nennen denn ende","jene enkel essen denke jenes könne jeden lesen","nasen dessen essens öffnen landen fanden fallendes","jedenfalls können seele dann es an kann je jede jedes","edles des ans elf and alle fand dank sank sense","nelke esel lesende danken flennen nase ekeln","ölkanne klassen flanke löffel jeans köln kassen","skandalös kekse kaskade dösen edel fesseln kasse dösen","enden fesseln senden senf faden fassen denen jene","könne essens jedenfalls an edles alle skandalös","danken ekeln jenen senken ölen nadel lassen kennen","enkel jeden öffnen können kann des fand sense","flennen ölkanne löffel jeans edel kenne kasse lenken","allen laken fallen nennen essen lesen landen seele","je ans dank kekse nelke klassen köln den jens","danke lösen klaffen denn denke nasen fanden dann","jede elf sank kaskade esel nase flanke kassen","denken elan dekan laden allenfalls ende jenes","dessen fallendes es jedes and lesende"],
@@ -134,7 +133,7 @@ while running:
             input_active = True
             while input_active and not float(start_time)+float(Duration_time) <= float(time.time()):
                 Match = False
-                Text = str(random.choice(Sätze[int(Level)]))
+                Text = str(random.choice(Sätze[int(Level)-1]))
                 while not float(start_time)+float(Duration_time) <= float(time.time()) and input_active and not Match:
                     for event in pygame.event.get():
                         if event.type == pygame.KEYDOWN:
@@ -146,28 +145,38 @@ while running:
                                     Match = True
                                     Punkte += 1
                                     Input = ''
-                                    print(float(start_time)+float(Duration_time))
-                                    print(float(time.time()))
                             elif event.key == pygame.K_BACKSPACE:
                                 Input = Input[:-1]
                             elif event.key == pygame.K_ESCAPE:
-                                running = False
-                                input_active = False
-                                stop = True
+                                start_time = start_time-Duration_time
                                 print("DEBUG: Escape")
-                                break
+                            elif event.key == pygame.K_RCTRL:
+                                CTRL[0] = True
+                                CTRL[1] = float(time.time())
+                                print("DEBUG: CTRL")
+                            elif CTRL[0]:
+                                if CTRL[1]+1.0 <= float(time.time()):
+                                    CTRL[0] = False
+                                if event.key == pygame.K_INSERT and CTRL[0]:
+                                    Match = True
+                                    CTRL[0] = False
+                                    print("DEBUG: Skipped")
                             else:
                                 if input_active:
                                     Input += event.unicode
                     text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                    if text.get_width() > Fensterbreite:
+                        text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
                     screen.blit(input, (Fensterbreite/2 - input.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time.time()):
+            reset()
             punkte = pgprint("Punkte: "+str(Punkte))
             screen.blit(punkte, (Fensterbreite/2 - punkte.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
+            pygame.display.flip()
     # Stopbildschirm
     #screen.fill(ROT)
     #Game_over_text = font.render("Game over!", True, (SCHWARZ))
