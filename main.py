@@ -2,6 +2,7 @@
 import random
 import time
 import pygame
+print("Made by xxxb. All rights reserved.")
 # Initialize Pygame
 pygame.init()
 debugging = True
@@ -38,7 +39,9 @@ Duration = ''
 duration = ''
 Input = ''
 Punkte = 0
+Fehler = 0
 Stage = 1
+Backspace = True
 CTRL = [False, time.time()]
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
@@ -145,7 +148,7 @@ while running:
                                     Match = True
                                     Punkte += 1
                                     Input = ''
-                            elif event.key == pygame.K_BACKSPACE:
+                            elif event.key == pygame.K_BACKSPACE and Backspace:
                                 Input = Input[:-1]
                             elif event.key == pygame.K_ESCAPE:
                                 start_time = start_time-Duration_time
@@ -163,7 +166,15 @@ while running:
                                     print("DEBUG: Skipped")
                             else:
                                 if input_active:
-                                    Input += event.unicode
+                                    if not event.key == pygame.K_BACKSPACE:
+                                        Input += event.unicode
+                            if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
+                                Punkte += 1
+                                Backspace = False
+                            else:
+                                if not event.key == pygame.K_RETURN:
+                                    Fehler += 1
+                                    Backspace = True
                     text = pgprint(Text, pygame.font.SysFont('freesans', 30))
                     if text.get_width() > Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
@@ -175,7 +186,11 @@ while running:
         if float(start_time)+float(Duration_time) <= float(time.time()):
             reset()
             punkte = pgprint("Punkte: "+str(Punkte))
-            screen.blit(punkte, (Fensterbreite/2 - punkte.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
+            fehler = pgprint("Fehler: "+str(Fehler))
+            duration = pgprint("Länge: "+str(Duration) + " Minuten")
+            screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
+            screen.blit(fehler, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2)+fehler.get_height()))
+            screen.blit(duration, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2) + duration.get_height() + fehler.get_height()))
             pygame.display.flip()
     # Stopbildschirm
     #screen.fill(ROT)
