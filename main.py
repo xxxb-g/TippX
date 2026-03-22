@@ -88,7 +88,7 @@ while running:
                     elif event.key == pygame.K_BACKSPACE:
                         Level = Level[:-1]
                     elif event.key == pygame.K_ESCAPE:
-                        exit()
+                        raise SystemExit
             reset()
             Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfiger-Schreibsystem.\nEs werden Sätze erscheinen, die du so schnell, wie möglich tippen sollst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
@@ -230,4 +230,4 @@ while running:
 # Quit Pygame
 print("DEBUG: End Programm")
 pygame.quit()
-exit()
+raise SystemExit
