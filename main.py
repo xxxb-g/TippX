@@ -51,6 +51,7 @@ Backspace = True
 CTRL = [False, time()]
 pygame.mixer.init()
 ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.mp3"))
+döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
 ding.set_volume(0.5)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
@@ -208,10 +209,13 @@ while running:
                                         Input += event.unicode
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
                                 Punkte += 1
+                                ding.play()
                                 Backspace = False
                             else:
                                 if not event.key == pygame.K_RETURN:
-                                    Fehler += 1
+                                    if not event.key == pygame.K_BACKSPACE:
+                                        Fehler += 1
+                                        döp.play()
                                     Backspace = True
                     text = pgprint(Text, pygame.font.SysFont('freesans', 30))
                     if text.get_width() > Fensterbreite:
