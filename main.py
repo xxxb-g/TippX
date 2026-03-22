@@ -40,7 +40,7 @@ duration = ''
 Input = ''
 Punkte = 0
 Fehler = 0
-Stage = 1
+Stage = 0
 Backspace = True
 CTRL = [False, time.time()]
 clock.tick(500)
@@ -79,6 +79,28 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 running = False
+    if Stage == 0:
+        while input_active and Stage == 0:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        Stage += 1
+                    elif event.key == pygame.K_BACKSPACE:
+                        Level = Level[:-1]
+                    elif event.key == pygame.K_ESCAPE:
+                        exit()
+            reset()
+            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfiger-Schreibsystem.\nEs werden Sätze erscheinen, die du so schnell, wie möglich tippen sollst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            for i in range(len(Text.split("\n"))):
+                if Text.split("\n")[i] == "TippX":
+                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
+                elif i == len(Text.split("\n")) - 1:
+                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (0, 100, 0))
+                else:
+                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+                screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+            pygame.display.flip()
+
     if Stage == 1:
         while input_active:
             for event in pygame.event.get():
@@ -89,6 +111,9 @@ while running:
                                 input_active = False
                     elif event.key == pygame.K_BACKSPACE:
                         Level = Level[:-1]
+                    elif event.key == pygame.K_ESCAPE:
+                        input_active = False
+                        running = False
                     else:
                         if input_active:
                             Level += event.unicode
@@ -123,6 +148,9 @@ while running:
                                     Stage += 1
                         elif event.key == pygame.K_BACKSPACE:
                             Duration = Duration[:-1]
+                        elif event.key == pygame.K_ESCAPE:
+                            input_active = False
+                            running = False
                         else:
                             if input_active:
                                 Duration += event.unicode
@@ -179,27 +207,23 @@ while running:
                     if text.get_width() > Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
-                    input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
-                    screen.blit(input, (Fensterbreite/2 - input.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                    input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 30), (200, 0, 0))
+                    screen.blit(input, (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time.time()):
             reset()
-            punkte = pgprint("Punkte: "+str(Punkte))
-            fehler = pgprint("Fehler: "+str(Fehler))
+            punkte = pgprint("Punkte: "+str(Punkte), pygame.font.SysFont('freesans', 48), (40,190,40))
+            fehler = pgprint("Fehler: "+str(Fehler), pygame.font.SysFont('freesans', 48), (140,5,5))
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
+            score = pgprint("Score: "+str(round((float(Punkte)/float(Fehler+1))*float(Duration))))
+            ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
+            screen.blit(score, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 3*punkte.get_height()))
+            screen.blit(ApM, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 2*punkte.get_height()))
             screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
             screen.blit(fehler, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2)+fehler.get_height()))
             screen.blit(duration, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2) + duration.get_height() + fehler.get_height()))
             pygame.display.flip()
-    # Stopbildschirm
-    #screen.fill(ROT)
-    #Game_over_text = font.render("Game over!", True, (SCHWARZ))
-    #screen.blit(Game_over_text, (Fensterbreite/2 - Game_over_text.get_width()/2, Fensterhöhe/2 - Game_over_text.get_height()/2))
-    #pygame.display.flip()
-
-    #pygame.draw.rect(screen,BLAU, (gegner_x, gegner_y, gegner_breite, gegner_höhe))
-    #screen.blit(pgprint("TippX"), (Fensterbreite/2 - pgprint("TippX").get_width()/2, Fensterhöhe/10 - pgprint("TippX").get_height()/2))
     clock.tick(500)
     pygame.display.flip()
 
