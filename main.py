@@ -228,4 +228,6 @@ while running:
     pygame.display.flip()
 
 # Quit Pygame
+print("DEBUG: End Programm")
 pygame.quit()
+exit()
