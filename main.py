@@ -222,7 +222,7 @@ while running:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 30), (200, 0, 0))
-                    screen.blit(input, (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                    screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
