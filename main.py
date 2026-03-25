@@ -239,7 +239,7 @@ while running:
             fehler = pgprint("Fehler: "+str(Fehler), pygame.font.SysFont('freesans', 48), (140,5,5))
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
-            score = pgprint("Score: "+str(round(((float(Punkte)/float(Duration)))-3*float(Fehler))))
+            score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration))))))
             screen.blit(score, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 3*punkte.get_height()))
             screen.blit(ApM, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 2*punkte.get_height()))
             screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
