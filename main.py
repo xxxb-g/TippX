@@ -98,14 +98,14 @@ while running:
         while input_active and Stage == 0:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
+                    if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         Stage += 1
                     elif event.key == pygame.K_BACKSPACE:
                         Level = Level[:-1]
                     elif event.key == pygame.K_ESCAPE:
                         raise SystemExit
             reset()
-            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfiger-Schreibsystem.\nEs werden Sätze erscheinen, die du so schnell, wie möglich tippen sollst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
@@ -120,7 +120,7 @@ while running:
         while input_active:
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_RETURN:
+                    if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if Level.isdigit():
                             if int(Level) > 0 and int(Level) <= len(Sätze):
                                 input_active = False
@@ -139,7 +139,7 @@ while running:
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
             text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.SysFont('freesans', 20))
-            screen.blit(level, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',30),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+            screen.blit(level, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
 
             pygame.display.flip()
         else:
@@ -155,7 +155,7 @@ while running:
         while input_active:
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_RETURN:
+                        if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                             if isfloat(Duration):
                                 if float(Duration) >= 0.1:
                                     input_active = False
@@ -172,7 +172,7 @@ while running:
                             if input_active:
                                 Duration += event.unicode
                 duration = pgprint("Deine Eingabe: "+Duration, pygame.font.SysFont('freesans', 20), (200, 0, 0))
-                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',30),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                 pygame.display.flip()
                 reset()
@@ -185,7 +185,7 @@ while running:
                 while not float(start_time)+float(Duration_time) <= float(time()) and input_active and not Match:
                     for event in pygame.event.get():
                         if event.type == pygame.KEYDOWN:
-                            if event.key == pygame.K_RETURN:
+                            if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                                 print("DEBUG: Input= "+Input)
                                 print("DEBUG: Text= "+Text)
                                 if Input == Text:
@@ -212,25 +212,28 @@ while running:
                                     print("DEBUG: Skipped")
                             else:
                                 if input_active:
-                                    if not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                    if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
                                         Input += event.unicode
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
-                                if not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
                                     Punkte += 1
                                     ding.play()
                                 Backspace = False
                             else:
                                 if not event.key == pygame.K_RETURN:
-                                    if not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                    if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
                     text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
-                    if text.get_width() > Fensterbreite:
-                        text = pgprint(Text, pygame.font.SysFont('freesans', 20))
-                    screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 30), (200, 0, 0))
-                    screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                    if pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
+                        text = pgprint(Text, pygame.font.SysFont('freesans', 20))
+                        input = pgprint("Deine Eingabe: " + Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
+                        screen.blit(input, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 20),(200, 0, 0)).get_width(),((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                    else:
+                        screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                    screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
