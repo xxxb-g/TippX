@@ -212,21 +212,21 @@ while running:
                                     print("DEBUG: Skipped")
                             else:
                                 if input_active:
-                                    if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                    if not event.key == pygame.K_BACKSPACE and event.unicode:
                                         Input += event.unicode
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
-                                if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                if event.unicode and event.key != pygame.K_BACKSPACE:
                                     Punkte += 1
                                     ding.play()
                                 Backspace = False
                             else:
                                 if not event.key == pygame.K_RETURN:
-                                    if not event.key == pygame.K_KP_ENTER and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                    if not event.key == pygame.K_BACKSPACE and event.unicode:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
                     text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
-                    input = pgprint("Deine Eingabe: "+Input, pygame.font.SysFont('freesans', 30), (200, 0, 0))
+                    input = pgprint("Deine Eingabe: "+Input+"|", pygame.font.SysFont('freesans', 30), (200, 0, 0))
                     if pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                         input = pgprint("Deine Eingabe: " + Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
