@@ -57,6 +57,7 @@ pygame.mixer.init()
 ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.mp3"))
 döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
 ding.set_volume(0.5)
+döp.set_volume(0.2)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
          ["enden jenen kenne den denken senden senken","lenken jens elan senf ölen allen danke dekan faden","nadel laken lösen laden fassen lassen fallen","klaffen allenfalls denen kennen nennen denn ende","jene enkel essen denke jenes könne jeden lesen","nasen dessen essens öffnen landen fanden fallendes","jedenfalls können seele dann es an kann je jede jedes","edles des ans elf and alle fand dank sank sense","nelke esel lesende danken flennen nase ekeln","ölkanne klassen flanke löffel jeans köln kassen","skandalös kekse kaskade dösen edel fesseln kasse dösen","enden fesseln senden senf faden fassen denen jene","könne essens jedenfalls an edles alle skandalös","danken ekeln jenen senken ölen nadel lassen kennen","enkel jeden öffnen können kann des fand sense","flennen ölkanne löffel jeans edel kenne kasse lenken","allen laken fallen nennen essen lesen landen seele","je ans dank kekse nelke klassen köln den jens","danke lösen klaffen denn denke nasen fanden dann","jede elf sank kaskade esel nase flanke kassen","denken elan dekan laden allenfalls ende jenes","dessen fallendes es jedes and lesende"],
@@ -211,19 +212,20 @@ while running:
                                     print("DEBUG: Skipped")
                             else:
                                 if input_active:
-                                    if not event.key == pygame.K_BACKSPACE:
+                                    if not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
                                         Input += event.unicode
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
-                                Punkte += 1
-                                ding.play()
+                                if not event.key == pygame.K_RETURN and not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
+                                    Punkte += 1
+                                    ding.play()
                                 Backspace = False
                             else:
                                 if not event.key == pygame.K_RETURN:
-                                    if not event.key == pygame.K_BACKSPACE:
+                                    if not event.key == pygame.K_BACKSPACE and not event.key == pygame.K_RSHIFT and not event.key == pygame.K_LSHIFT and not event.key == pygame.K_LALT:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
-                    text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                    text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
                     if text.get_width() > Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
@@ -237,7 +239,7 @@ while running:
             fehler = pgprint("Fehler: "+str(Fehler), pygame.font.SysFont('freesans', 48), (140,5,5))
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
-            score = pgprint("Score: "+str(round(((float(Punkte)/float(Duration))/float(Fehler+1)))))
+            score = pgprint("Score: "+str(round(((float(Punkte)/float(Duration)))-3*float(Fehler))))
             screen.blit(score, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 3*punkte.get_height()))
             screen.blit(ApM, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 2*punkte.get_height()))
             screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
