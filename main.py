@@ -220,12 +220,12 @@ while running:
                                     ding.play()
                                 Backspace = False
                             else:
-                                if not event.key == pygame.K_RETURN:
+                                if not event.key == pygame.K_RETURN and not event.key == pygame.K_KP_ENTER:
                                     if not event.key == pygame.K_BACKSPACE and event.unicode:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
-                            if len(Text)<=10:
+                            if len(Text)<=10 and int(Level)<18:
                                 print("DEBUG: Input= " + Input)
                                 print("DEBUG: Text= " + Text)
                                 if Input == Text:
@@ -237,7 +237,7 @@ while running:
                                 text = pgprint(Text, pygame.font.SysFont('freesans', 30))
                             else:
                                 text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
-                    if len(Text)<=10:
+                    if len(Text)<=10 and int(Level)<18:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 30))
                     else:
                         text = pgprint(Text + chr(0x21B5), pygame.font.SysFont('freesans', 30))
