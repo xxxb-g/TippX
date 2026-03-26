@@ -57,7 +57,7 @@ pygame.mixer.init()
 ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.mp3"))
 döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
 ding.set_volume(0.5)
-döp.set_volume(0.2)
+döp.set_volume(0.21)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
          ["enden jenen kenne den denken senden senken","lenken jens elan senf ölen allen danke dekan faden","nadel laken lösen laden fassen lassen fallen","klaffen allenfalls denen kennen nennen denn ende","jene enkel essen denke jenes könne jeden lesen","nasen dessen essens öffnen landen fanden fallendes","jedenfalls können seele dann es an kann je jede jedes","edles des ans elf and alle fand dank sank sense","nelke esel lesende danken flennen nase ekeln","ölkanne klassen flanke löffel jeans köln kassen","skandalös kekse kaskade dösen edel fesseln kasse dösen","enden fesseln senden senf faden fassen denen jene","könne essens jedenfalls an edles alle skandalös","danken ekeln jenen senken ölen nadel lassen kennen","enkel jeden öffnen können kann des fand sense","flennen ölkanne löffel jeans edel kenne kasse lenken","allen laken fallen nennen essen lesen landen seele","je ans dank kekse nelke klassen köln den jens","danke lösen klaffen denn denke nasen fanden dann","jede elf sank kaskade esel nase flanke kassen","denken elan dekan laden allenfalls ende jenes","dessen fallendes es jedes and lesende"],
@@ -225,7 +225,22 @@ while running:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
-                    text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
+                            if len(Text)<=10:
+                                print("DEBUG: Input= " + Input)
+                                print("DEBUG: Text= " + Text)
+                                if Input == Text:
+                                    print("DEBUG: Match")
+                                    Match = True
+                                    Punkte += 1
+                                    ding.play()
+                                    Input = ''
+                                text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                            else:
+                                text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
+                    if len(Text)<=10:
+                        text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                    else:
+                        text = pgprint(Text + chr(0x21B5), pygame.font.SysFont('freesans', 30))
                     input = pgprint("Deine Eingabe: "+Input+"|", pygame.font.SysFont('freesans', 30), (200, 0, 0))
                     if pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
