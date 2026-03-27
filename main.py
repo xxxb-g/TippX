@@ -7,9 +7,11 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
 parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
+parser.add_argument("--dark_mode", action="store_true", help="aktiviere Dark Mode")
 args = parser.parse_args()
 # globale Variable setzen
 debugging = args.debug
+dark_mode = args.dark_mode
 
 print("Made by xxxb. All rights reserved.")
 
@@ -27,13 +29,19 @@ font = pygame.font.SysFont('freesans', 48)
 pygame.display.set_caption("TippX")
 
 # Funktionen
+if dark_mode:
+    BLACK = (255,255,255)
+    Hintergrund = (0, 0, 0)
+else:
+    BLACK = (1,1,1) #Das ist nicht (0,0,0), weil ich das lustig finde. Nicht, weil es eine Bedeutung hätte oder so.
+    Hintergrund = (255,240,200)
+
 def reset():
-    screen.fill((255,240,200))
+    screen.fill(Hintergrund)
     # Fenstergröße ermitteln
     global Fensterbreite, Fensterhöhe
     Fensterbreite, Fensterhöhe = screen.get_size()
-
-def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (0,0,0)):
+def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = BLACK):
     if type(text) != str:
         return("No String")
     else:
