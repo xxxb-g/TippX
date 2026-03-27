@@ -36,11 +36,24 @@ else:
     Hintergrund = (255,240,200)
 
 def reset():
+    if Stage <= 2: # Gets called every tick bc my code is spagethi (nevím jak se to píše).
+        global BLACK
+        global Hintergrund
+        if dark_mode:
+            BLACK = (255, 255, 255)
+            Hintergrund = (0, 0, 0)
+        else:
+            BLACK = (1, 1,
+                     1)  # Das ist nicht (0,0,0), weil ich das lustig finde. Nicht, weil es eine Bedeutung hätte oder so.
+            Hintergrund = (255, 240, 200)
     screen.fill(Hintergrund)
     # Fenstergröße ermitteln
     global Fensterbreite, Fensterhöhe
     Fensterbreite, Fensterhöhe = screen.get_size()
-def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = BLACK):
+def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (-1,-2,-3)):
+    if color == (-1,-2,-3):
+        global BLACK
+        color = BLACK
     if type(text) != str:
         return("No String")
     else:
@@ -120,8 +133,10 @@ while running:
                         Level = Level[:-1]
                     elif event.key == pygame.K_ESCAPE:
                         raise SystemExit
+                    elif event.key == pygame.K_d:
+                        dark_mode = not dark_mode
             reset()
-            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-D: Dark Mode an-/ausschalten (im Menu)\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
@@ -143,8 +158,9 @@ while running:
                     elif event.key == pygame.K_BACKSPACE:
                         Level = Level[:-1]
                     elif event.key == pygame.K_ESCAPE:
-                        input_active = False
-                        running = False
+                        raise SystemExit
+                    elif event.key == pygame.K_d:
+                        dark_mode = not dark_mode
                     else:
                         if input_active:
                             Level += event.unicode
@@ -184,6 +200,8 @@ while running:
                         elif event.key == pygame.K_ESCAPE:
                             input_active = False
                             running = False
+                        elif event.key == pygame.K_g:
+                            dark_mode = True
                         else:
                             if input_active:
                                 Duration += event.unicode
@@ -275,7 +293,7 @@ while running:
             fehler = pgprint("Fehler: "+str(Fehler), pygame.font.SysFont('freesans', 48), (140,5,5))
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
-            score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration))))))
+            score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration)))-(0.01 if dark_mode else 0)))) # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
             screen.blit(score, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 3*punkte.get_height()))
             screen.blit(ApM, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 2*punkte.get_height()))
             screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
