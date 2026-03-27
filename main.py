@@ -181,6 +181,7 @@ while running:
             input_active = True
             while input_active and not float(start_time)+float(Duration_time) <= float(time()):
                 Match = False
+                Backspace = False
                 Text = str(choice(Sätze[int(Level)-1]))
                 while not float(start_time)+float(Duration_time) <= float(time()) and input_active and not Match:
                     for event in pygame.event.get():
@@ -212,8 +213,9 @@ while running:
                                     print("DEBUG: Skipped")
                             else:
                                 if input_active:
-                                    if not event.key == pygame.K_BACKSPACE and event.unicode:
+                                    if (not event.key == pygame.K_BACKSPACE and event.unicode and not Backspace) or len(Input)==0:
                                         Input += event.unicode
+                                        Backspace = False
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
                                 if event.unicode and event.key != pygame.K_BACKSPACE:
                                     Punkte += 1
@@ -221,7 +223,7 @@ while running:
                                 Backspace = False
                             else:
                                 if not event.key == pygame.K_RETURN and not event.key == pygame.K_KP_ENTER:
-                                    if not event.key == pygame.K_BACKSPACE and event.unicode:
+                                    if not event.key == pygame.K_BACKSPACE and event.unicode and not Backspace:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
