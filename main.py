@@ -7,12 +7,12 @@ args = parser.parse_args()
 # globale Variable setzen
 debugging = args.debug
 dark_mode = args.dark_mode
+print("Made by xxxb. All rights reserved.\n##################################\n")
+
 from random import choice
 from time import time
 import pygame
 from pathlib import Path
-
-print("Made by xxxb. All rights reserved.")
 
 # Initialize Pygame
 pygame.init()
