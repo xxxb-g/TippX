@@ -3,10 +3,19 @@ from random import choice
 from time import time
 import pygame
 from pathlib import Path
+from argparse import ArgumentParser
+
+parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
+parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
+args = parser.parse_args()
+# globale Variable setzen
+debugging = args.debug
+
 print("Made by xxxb. All rights reserved.")
+
 # Initialize Pygame
 pygame.init()
-debugging = True
+
 # Setup colors
 Fensterbreite = 1000
 Fensterhöhe = 750
