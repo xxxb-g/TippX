@@ -1,10 +1,5 @@
 # All rights reserved for now.
-from random import choice
-from time import time
-import pygame
-from pathlib import Path
 from argparse import ArgumentParser
-
 parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
 parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
 parser.add_argument("--dark_mode", action="store_true", help="aktiviere Dark Mode")
@@ -12,6 +7,10 @@ args = parser.parse_args()
 # globale Variable setzen
 debugging = args.debug
 dark_mode = args.dark_mode
+from random import choice
+from time import time
+import pygame
+from pathlib import Path
 
 print("Made by xxxb. All rights reserved.")
 
@@ -151,7 +150,7 @@ while running:
                             Level += event.unicode
             level = pgprint("Deine Eingabe: "+Level, pygame.font.SysFont('freesans', 20), (200, 0, 0))
             reset()
-            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|\)\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
+            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
