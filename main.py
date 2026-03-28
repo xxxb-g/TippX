@@ -136,7 +136,7 @@ while running:
                     elif event.key == pygame.K_d:
                         dark_mode = not dark_mode
             reset()
-            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-D: Dark Mode an-/ausschalten (im Menu)\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-D: Dark Mode umschalten (im Menu)\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
