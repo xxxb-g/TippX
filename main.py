@@ -277,7 +277,7 @@ while running:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 30))
                     else:
                         text = pgprint(Text + chr(0x21B5), pygame.font.SysFont('freesans', 30))
-                    input = pgprint("Deine Eingabe: "+Input+"|", pygame.font.SysFont('freesans', 30), (200, 0, 0))
+                    input = pgprint("Deine Eingabe: "+Input+("|" if int((time() - start_time) * 2) % 2 == 0 else ""), pygame.font.SysFont('freesans', 30), (200, 0, 0))
                     if pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
                         text = pgprint(Text, pygame.font.SysFont('freesans', 20))
                         input = pgprint("Deine Eingabe: " + Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
