@@ -137,7 +137,7 @@ while running:
                     elif event.key == pygame.K_d:
                         dark_mode = not dark_mode
             reset()
-            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nDu kannst gleich ein Level und eine Trainingsdauer festlegen.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Statistik.\n\nDu kannst mit:\n-Escape: Abbrechen\n-D: Dark Mode umschalten (im Menu)\n-Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nAm Anfang legst du ein Level und eine Zeit fest.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Auswertung.\n\nDu kannst mit:\n- Escape: Abbrechen\n- D: Dark Mode umschalten (im Menü)\n- Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
@@ -169,7 +169,7 @@ while running:
                             Level += event.unicode
             level = pgprint("Deine Eingabe: "+Level, pygame.font.SysFont('freesans', 20), (200, 0, 0))
             reset()
-            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock1(Ziffern auf dem ~)\n20: Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
+            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus allen vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)\n20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)\n\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
@@ -301,9 +301,12 @@ while running:
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
             score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration)))-(0.01 if dark_mode else 0)))) # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
-            Text = "Drücke Enter, um nochmal zu spielen\nDrücke Escape, um zu Beenden."
+            Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
+            Titel = "Auswertung"
             dest_zero = (Fensterbreite/10, Fensterhöhe/2)
             dest = [dest_zero[0], dest_zero[1]]
+            dest[1] = dest_zero[1] - 4.2*punkte.get_height()
+            screen.blit(pgprint(Titel, pygame.font.SysFont('freesans', 55)), dest)
             dest[1] = dest_zero[1] - 3*punkte.get_height()
             screen.blit(score, dest)
             dest[1] = dest_zero[1] - 2*punkte.get_height()
