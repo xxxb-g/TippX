@@ -39,13 +39,15 @@ def reset():
     if Stage <= 2: # Gets called every tick bc my code is spagethi (nevím jak se to píše).
         global BLACK
         global Hintergrund
+        global anweisung_color
         if dark_mode:
             BLACK = (255, 255, 255)
             Hintergrund = (0, 0, 0)
+            anweisung_color = (145,240,55)
         else:
-            BLACK = (1, 1,
-                     1)  # Das ist nicht (0,0,0), weil ich das lustig finde. Nicht, weil es eine Bedeutung hätte oder so.
+            BLACK = (1, 1,1)  # Das ist nicht (0,0,0), weil ich das lustig finde. Nicht, weil es eine Bedeutung hätte oder so.
             Hintergrund = (255, 240, 200)
+            anweisung_color = (10, 10, 200)
     screen.fill(Hintergrund)
     # Fenstergröße ermitteln
     global Fensterbreite, Fensterhöhe
