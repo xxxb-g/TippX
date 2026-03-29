@@ -325,14 +325,25 @@ while running:
                 dest[1] = dest_zero[1] + (i+2)*punkte.get_height()
                 screen.blit(text, dest)
             pygame.display.flip()
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+            while Stage == 3:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_ESCAPE:
+                            raise SystemExit
+                        elif event.key == pygame.K_RETURN:
+                            Stage = 1
+                            anweisung_color = (10, 10, 200)
+                            input_active = True
+                            Level = ''
+                            Duration = ''
+                            duration = ''
+                            Input = ''
+                            Punkte = 0
+                            Fehler = 0
+                            Backspace = True
+                            CTRL = [False, time()]
+                    elif event.type == pygame.QUIT:
                         raise SystemExit
-                    elif event.key == pygame.K_RETURN:
-                        Stage = 1
-                elif event.type == pygame.QUIT:
-                    raise SystemExit
     clock.tick(500)
     pygame.display.flip()
 
