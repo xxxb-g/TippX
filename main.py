@@ -116,13 +116,12 @@ print("DEBUG: Start game loop")
 while running:
     # screen reset
     reset()
-    Tasten = pygame.key.get_pressed()
-    if Tasten[pygame.K_ESCAPE]:
-        running = False
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                running = False
+                raise SystemExit
+            if event.type == pygame.QUIT:
+                raise SystemExit
     if Stage == 0:
         while input_active and Stage == 0:
             for event in pygame.event.get():
@@ -146,7 +145,7 @@ while running:
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (0, 100, 0))
                 else:
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
-                screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+                screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
             pygame.display.flip()
 
     if Stage == 1:
@@ -173,9 +172,9 @@ while running:
             Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2:e,n\n3:r,i\n4:t,h\n5:c,u\n6:Shift Taste\n7:g,G,.,:\n8:o,O,m,M\n9:b,B,w,W\n10:z,Z\n11:v,V,p,P\n12:ü,Ü,ä,Ä\n13:ß,?,q,Q\n14:y,Y,x,X,-,/\n15:häufige Sonderzeichen(!'()_)\n16:Ziffern\n17:Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19:Ziffernblock1(Ziffern auf dem ~)\n20:Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
-                screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+                screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
             text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.SysFont('freesans', 20))
-            screen.blit(level, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+            screen.blit(level, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
 
             pygame.display.flip()
         else:
@@ -195,7 +194,7 @@ while running:
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                             if isfloat(Duration):
-                                if float(Duration) >= 0.1:
+                                if float(Duration) >= 0.01:
                                     input_active = False
                                     start_time = time()
                                     print("DEBUG: Duration="+str(Duration))
@@ -302,12 +301,32 @@ while running:
             duration = pgprint("Länge: "+str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
             score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration)))-(0.01 if dark_mode else 0)))) # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
-            screen.blit(score, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 3*punkte.get_height()))
-            screen.blit(ApM, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - 2*punkte.get_height()))
-            screen.blit(punkte, (Fensterbreite/2 - duration.get_width()/2, Fensterhöhe/2 - punkte.get_height()/2))
-            screen.blit(fehler, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2)+fehler.get_height()))
-            screen.blit(duration, (Fensterbreite/2 - duration.get_width()/2, (Fensterhöhe/2 - punkte.get_height()/2) + duration.get_height() + fehler.get_height()))
+            Text = "Drücke Enter, um nochmal zu spielen\nDrücke Escape, um zu Beenden."
+            dest_zero = (Fensterbreite/10, Fensterhöhe/2)
+            dest = [dest_zero[0], dest_zero[1]]
+            dest[1] = dest_zero[1] - 3*punkte.get_height()
+            screen.blit(score, dest)
+            dest[1] = dest_zero[1] - 2*punkte.get_height()
+            screen.blit(ApM, dest)
+            dest[1] = dest_zero[1] - punkte.get_height()
+            screen.blit(punkte, dest)
+            dest[1] = dest_zero[1]
+            screen.blit(fehler, dest)
+            dest[1] = dest_zero[1] + punkte.get_height()
+            screen.blit(duration, dest)
+            for i in range(len(Text.split("\n"))):
+                text = pgprint(Text.split("\n")[i])
+                dest[1] = dest_zero[1] + (i+2)*punkte.get_height()
+                screen.blit(text, dest)
             pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        raise SystemExit
+                    elif event.key == pygame.K_RETURN:
+                        Stage = 1
+                elif event.type == pygame.QUIT:
+                    raise SystemExit
     clock.tick(500)
     pygame.display.flip()
 
