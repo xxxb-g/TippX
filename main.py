@@ -169,7 +169,7 @@ while running:
                             Level += event.unicode
             level = pgprint("Deine Eingabe: "+Level, pygame.font.SysFont('freesans', 20), (200, 0, 0))
             reset()
-            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n1: Grundstellung\n2: e,n\n3: r,i\n4: t,h\n5: c,u\n6: Shift Taste\n7: g,G,.,:\n8: o,O,m,M\n9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock1(Ziffern auf dem ~)\n20: Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
+            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus dem vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock1(Ziffern auf dem ~)\n20: Ziffernblock2(Rechnen mit dem ~)\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
