@@ -126,6 +126,8 @@ while running:
     if Stage == 0:
         while input_active and Stage == 0:
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    raise SystemExit
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         Stage += 1
@@ -150,6 +152,8 @@ while running:
     if Stage == 1:
         while input_active:
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    raise SystemExit
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if Level.isdigit():
@@ -186,6 +190,8 @@ while running:
         input_active = True
         while input_active:
                 for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        raise SystemExit
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                             if isfloat(Duration):
@@ -219,6 +225,8 @@ while running:
                 Text = str(choice(Sätze[int(Level)-1]))
                 while not float(start_time)+float(Duration_time) <= float(time()) and input_active and not Match:
                     for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            raise SystemExit
                         if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                                 print("DEBUG: Input= "+Input)
