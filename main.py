@@ -72,6 +72,7 @@ else:
             return()
 
 # Setup new variables
+anweisung_color = (10, 10, 200)
 input_active = True
 Level = ''
 Duration = ''
@@ -142,7 +143,7 @@ while running:
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
                 elif i == len(Text.split("\n")) - 1:
-                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (0, 100, 0))
+                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), anweisung_color)
                 else:
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
@@ -172,6 +173,8 @@ while running:
             Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus allen vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)\n20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)\n\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+                if i == len(Text.split("\n")) - 1:
+                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20), anweisung_color)
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
             text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.SysFont('freesans', 20))
             screen.blit(level, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
@@ -184,7 +187,7 @@ while running:
     elif Stage == 2:
         Text = "Wie viele Minuten lang möchtest du trainieren?"
         for i in range(len(Text.split("\n"))):
-            text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+            text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20), anweisung_color)
             screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
         input_active = True
         while input_active:
@@ -318,7 +321,7 @@ while running:
             dest[1] = dest_zero[1] + punkte.get_height()
             screen.blit(duration, dest)
             for i in range(len(Text.split("\n"))):
-                text = pgprint(Text.split("\n")[i])
+                text = pgprint(Text.split("\n")[i], font, anweisung_color)
                 dest[1] = dest_zero[1] + (i+2)*punkte.get_height()
                 screen.blit(text, dest)
             pygame.display.flip()
