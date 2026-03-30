@@ -300,34 +300,37 @@ while running:
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
-            reset()
-            punkte = pgprint("Punkte: "+str(Punkte), pygame.font.SysFont('freesans', 48), (40,190,40))
-            fehler = pgprint("Fehler: "+str(Fehler), pygame.font.SysFont('freesans', 48), (140,5,5))
-            duration = pgprint("Länge: "+str(Duration) + " Minuten")
-            ApM = pgprint("Anschläge/Minute: "+str((float(Punkte))/float(Duration)))
-            score = pgprint("Score: "+str(0 if round(((float(Punkte-10*Fehler)/float(Duration)))) <=0 else round(((float(Punkte-10*Fehler)/float(Duration)))-(0.01 if dark_mode else 0)))) # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
-            Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
-            Titel = "Auswertung"
-            dest_zero = (Fensterbreite/10, Fensterhöhe/2)
-            dest = [dest_zero[0], dest_zero[1]]
-            dest[1] = dest_zero[1] - 4.2*punkte.get_height()
-            screen.blit(pgprint(Titel, pygame.font.SysFont('freesans', 55)), dest)
-            dest[1] = dest_zero[1] - 3*punkte.get_height()
-            screen.blit(score, dest)
-            dest[1] = dest_zero[1] - 2*punkte.get_height()
-            screen.blit(ApM, dest)
-            dest[1] = dest_zero[1] - punkte.get_height()
-            screen.blit(punkte, dest)
-            dest[1] = dest_zero[1]
-            screen.blit(fehler, dest)
-            dest[1] = dest_zero[1] + punkte.get_height()
-            screen.blit(duration, dest)
-            for i in range(len(Text.split("\n"))):
-                text = pgprint(Text.split("\n")[i], font, anweisung_color)
-                dest[1] = dest_zero[1] + (i+2)*punkte.get_height()
-                screen.blit(text, dest)
-            pygame.display.flip()
             while Stage == 3:
+                reset()
+                punkte = pgprint("Punkte: " + str(Punkte), pygame.font.SysFont('freesans', 48), (40, 190, 40))
+                fehler = pgprint("Fehler: " + str(Fehler), pygame.font.SysFont('freesans', 48), (140, 5, 5))
+                duration = pgprint("Länge: " + str(Duration) + " Minuten")
+                ApM = pgprint("Anschläge/Minute: " + str((float(Punkte)) / float(Duration)))
+                score = pgprint("Score: " + str(
+                    0 if round(((float(Punkte - 10 * Fehler) / float(Duration)))) <= 0 else round(
+                        ((float(Punkte - 10 * Fehler) / float(Duration))) - (
+                            0.01 if dark_mode else 0))))  # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
+                Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
+                Titel = "Auswertung"
+                dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
+                dest = [dest_zero[0], dest_zero[1]]
+                dest[1] = dest_zero[1] - 4.2 * punkte.get_height()
+                screen.blit(pgprint(Titel, pygame.font.SysFont('freesans', 55)), dest)
+                dest[1] = dest_zero[1] - 3 * punkte.get_height()
+                screen.blit(score, dest)
+                dest[1] = dest_zero[1] - 2 * punkte.get_height()
+                screen.blit(ApM, dest)
+                dest[1] = dest_zero[1] - punkte.get_height()
+                screen.blit(punkte, dest)
+                dest[1] = dest_zero[1]
+                screen.blit(fehler, dest)
+                dest[1] = dest_zero[1] + punkte.get_height()
+                screen.blit(duration, dest)
+                for i in range(len(Text.split("\n"))):
+                    text = pgprint(Text.split("\n")[i], font, anweisung_color)
+                    dest[1] = dest_zero[1] + (i + 2) * punkte.get_height()
+                    screen.blit(text, dest)
+                pygame.display.flip()
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_ESCAPE:
