@@ -17,7 +17,6 @@ from pathlib import Path
 # Initialize Pygame
 pygame.init()
 
-# Setup colors
 Fensterbreite = 1000
 Fensterhöhe = 750
 
