@@ -7,7 +7,7 @@ Zehnfingerschreiben lernen
 <br>
 
 # Kontakt
-wenn du Fragen, Hinweise und/oder Verbesserungsvorschläge hast, kannst du das entweder durch die Codeberg-Oberfläche oder durch eine Nachricht an mich herantragen.
+wenn du Fragen, Hinweise und/oder Verbesserungsvorschläge hast, kannst du das entweder durch die [Codeberg-Oberfläche](https://codeberg.org/xxxb/TippX/issues?state=open) oder durch eine Nachricht an mich herantragen.
 
 E-mail: goldhahn.benedikt@tutanota.de
 
