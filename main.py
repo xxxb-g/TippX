@@ -215,8 +215,7 @@ while running:
                         elif event.key == pygame.K_BACKSPACE:
                             Duration = Duration[:-1]
                         elif event.key == pygame.K_ESCAPE:
-                            input_active = False
-                            running = False
+                            raise SystemExit
                         elif event.key == pygame.K_g:
                             dark_mode = True
                         else:
