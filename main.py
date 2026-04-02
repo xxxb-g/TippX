@@ -73,6 +73,14 @@ else:
             return()
 
 # Setup new variables
+try:
+    file = open("highscore.txt")
+    highscore = file.read()
+except Exception:
+    file = open("highscore.txt", "w")
+    file.write("0")
+    highscore = "0"
+file.close()
 anweisung_color = (10, 10, 200)
 input_active = True
 Level = ''
@@ -299,24 +307,32 @@ while running:
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
+            punkte = pgprint("Punkte: " + str(Punkte), pygame.font.SysFont('freesans', 48), (40, 190, 40))
+            fehler = pgprint("Fehler: " + str(Fehler), pygame.font.SysFont('freesans', 48), (140, 5, 5))
+            duration = pgprint("Länge: " + str(Duration) + " Minuten")
+            ApM = pgprint("Anschläge/Minute: " + str((float(Punkte)) / float(Duration)))
+            Score = 0 if round(((float(Punkte - 10 * Fehler) / float(Duration)))) <= 0 else round(
+                    ((float(Punkte - 10 * Fehler) / float(Duration))) - (
+                        0.01 if dark_mode else 0)) # Das Punkteabziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
+            score = pgprint("Score: " + str(Score))
+            Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
+            Titel = "Auswertung"
+            Highscore = pgprint(f"Dein bisheriger Highscore: {highscore}" if Score <= int(highscore) else "Das ist ein neuer Highscore!")
+            dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
+            if not Score < int(highscore):
+                file = open("highscore.txt", "w")
+                file.write(str(Score))
+                highscore = str(Score)
+                file.close()
+            dest = [dest_zero[0], dest_zero[1]]
             while Stage == 3:
                 reset()
-                punkte = pgprint("Punkte: " + str(Punkte), pygame.font.SysFont('freesans', 48), (40, 190, 40))
-                fehler = pgprint("Fehler: " + str(Fehler), pygame.font.SysFont('freesans', 48), (140, 5, 5))
-                duration = pgprint("Länge: " + str(Duration) + " Minuten")
-                ApM = pgprint("Anschläge/Minute: " + str((float(Punkte)) / float(Duration)))
-                score = pgprint("Score: " + str(
-                    0 if round(((float(Punkte - 10 * Fehler) / float(Duration)))) <= 0 else round(
-                        ((float(Punkte - 10 * Fehler) / float(Duration))) - (
-                            0.01 if dark_mode else 0))))  # Das Punkte abziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
-                Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
-                Titel = "Auswertung"
-                dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
-                dest = [dest_zero[0], dest_zero[1]]
-                dest[1] = dest_zero[1] - 4.2 * punkte.get_height()
+                dest[1] = dest_zero[1] - 5.2 * punkte.get_height()
                 screen.blit(pgprint(Titel, pygame.font.SysFont('freesans', 55)), dest)
-                dest[1] = dest_zero[1] - 3 * punkte.get_height()
+                dest[1] = dest_zero[1] - 4 * punkte.get_height()
                 screen.blit(score, dest)
+                dest[1] = dest_zero[1] - 3 * punkte.get_height()
+                screen.blit(Highscore, dest)
                 dest[1] = dest_zero[1] - 2 * punkte.get_height()
                 screen.blit(ApM, dest)
                 dest[1] = dest_zero[1] - punkte.get_height()
