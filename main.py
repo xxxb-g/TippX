@@ -74,10 +74,10 @@ else:
 
 # Setup new variables
 try:
-    file = open("highscore.txt")
+    file = open(".highscore.txt")
     highscore = file.read()
 except Exception:
-    file = open("highscore.txt", "w")
+    file = open(".highscore.txt", "w")
     file.write("0")
     highscore = "0"
 file.close()
@@ -319,7 +319,7 @@ while running:
             Highscore = pgprint(f"Dein bisheriger Highscore: {highscore}" if Score <= int(highscore) else "Das ist ein neuer Highscore!")
             dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
             if not Score < int(highscore):
-                file = open("highscore.txt", "w")
+                file = open(".highscore.txt", "w")
                 file.write(str(Score))
                 highscore = str(Score)
                 file.close()
