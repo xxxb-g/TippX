@@ -93,9 +93,9 @@ Stage = 0
 Backspace = True
 CTRL = [False, time()]
 pygame.mixer.init()
-ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.mp3"))
+ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.wav"))
 döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
-ding.set_volume(0.5)
+#ding.set_volume(0.5)
 döp.set_volume(0.21)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
