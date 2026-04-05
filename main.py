@@ -314,7 +314,7 @@ while running:
                     ((float(Punkte - 10 * Fehler) / float(Duration))) - (
                         0.01 if dark_mode else 0)) # Das Punkteabziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
             score = pgprint("Score: " + str(Score))
-            Text = "\n\nDrücke Enter, um nochmal zu spielen\nDrücke Escape, um zu beenden."
+            Text = "\n\nDrücke Enter, um nochmal zu spielen.\nDrücke Escape, um zu beenden."
             Titel = "Auswertung"
             Highscore = pgprint(f"Dein bisheriger Highscore: {highscore}" if Score <= int(highscore) else "Das ist ein neuer Highscore!")
             dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
