@@ -95,7 +95,7 @@ CTRL = [False, time()]
 pygame.mixer.init()
 ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.wav"))
 döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
-#ding.set_volume(0.5)
+mute = "(laut)"
 döp.set_volume(0.21)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
@@ -146,8 +146,15 @@ while running:
                         raise SystemExit
                     elif event.key == pygame.K_d:
                         dark_mode = not dark_mode
+                    elif event.key == pygame.K_m:
+                        if mute == "(stummgeschaltet)":
+                            ding.set_volume(1)
+                            mute = "(laut)"
+                        elif mute == "(laut)":
+                            ding.set_volume(0)
+                            mute = "(stummgeschaltet)"
             reset()
-            Text = "TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nAm Anfang legst du ein Level und eine Zeit fest.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Auswertung.\n\nDu kannst mit:\n- Escape: Abbrechen\n- D: Dark Mode umschalten (im Menü)\n- Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = f"TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nAm Anfang legst du ein Level und eine Zeit fest.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Auswertung.\n\nDu kannst mit:\n- Escape: Abbrechen\n- D: Dark Mode umschalten (im Menü)\n- M: Richtig-Geräusch stummschalten {mute}\n- Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
