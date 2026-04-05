@@ -269,7 +269,7 @@ while running:
                                         Input += event.unicode
                                         Backspace = False
                             if len(Input) <= len(Text) and len(Input) != 0 and Input == Text[:len(Input)]:
-                                if event.unicode and event.key != pygame.K_BACKSPACE:
+                                if event.unicode and event.key != pygame.K_BACKSPACE and event.key != pygame.K_RETURN and event.key != pygame.K_KP_ENTER:
                                     Punkte += 1
                                     ding.play()
                                 Backspace = False
