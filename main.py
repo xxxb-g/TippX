@@ -13,13 +13,17 @@ from random import choice
 from time import time
 import pygame
 from pathlib import Path
+from requests import get
+import threading
+
 
 # Initialize Pygame
 pygame.init()
 
 Fensterbreite = 1000
 Fensterhöhe = 750
-
+Version = "v1.1.3"
+latest_tag = Version
 # Set up the game window
 screen = pygame.display.set_mode((Fensterbreite, Fensterhöhe), pygame.RESIZABLE | pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
@@ -27,6 +31,31 @@ font = pygame.font.SysFont('freesans', 48)
 pygame.display.set_caption("TippX")
 
 # Funktionen
+def update_check():
+    try:
+        # Fetching newest version
+        API_URL = "https://codeberg.org/api/v1/repos/xxxb/TippX/releases"
+        response = get(API_URL, timeout=5)
+        releases = response.json()
+        latest = releases[0]
+        global latest_tag
+        latest_tag = latest["tag_name"]
+        if latest_tag > Version:
+            print({
+                "neueste Version:": latest_tag,
+                "Veröffentlich am": latest["published_at"],
+            })
+        elif latest_tag < Version:
+            print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt gerade eine neuere Version.")
+    except Exception as e:
+        print(e)
+        print("""Konnte nicht auf Updates checken. Gründe sind:
+         - kein, zu langsames oder manipuliertes Internet,
+         - Codeberg server sind offline.
+         - etwas, woran ich noch nicht gedacht habe.""")
+
+threading.Thread(target=update_check, daemon=True).start()
+
 if dark_mode:
     BLACK = (255,255,255)
     Hintergrund = (0, 0, 0)
@@ -36,6 +65,7 @@ else:
 
 def reset():
     if Stage <= 2: # Gets called every tick bc my code is spagethi (nevím jak se to píše).
+        # Darkmode
         global BLACK
         global Hintergrund
         global anweisung_color
@@ -66,10 +96,13 @@ def isfloat(str):
         return(False)
 if 'debugging' in locals():
     if not debugging:
-        def print(text):
+        def dprint(text):
             return()
+    elif debugging:
+        def dprint(text):
+            print(text)
 else:
-    def print(text):
+    def dprint(text):
             return()
 
 # Setup new variables
@@ -121,7 +154,7 @@ Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "
 
 # Game loop
 running = True
-print("DEBUG: Start game loop")
+dprint("DEBUG: Start game loop")
 while running:
     # screen reset
     reset()
@@ -162,6 +195,7 @@ while running:
                 else:
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+
             pygame.display.flip()
 
     if Stage == 1:
@@ -197,7 +231,7 @@ while running:
             pygame.display.flip()
         else:
             Stage += 1
-            print("DEBUG: Level="+str(Level))
+            dprint("DEBUG: Level="+str(Level))
 
     elif Stage == 2:
         Text = "Wie viele Minuten lang möchtest du trainieren?"
@@ -215,7 +249,7 @@ while running:
                                 if float(Duration) >= 0.01:
                                     input_active = False
                                     start_time = time()
-                                    print("DEBUG: Duration="+str(Duration))
+                                    dprint("DEBUG: Duration="+str(Duration))
                                     Duration_time = float(Duration)*60
                                     Stage += 1
                         elif event.key == pygame.K_BACKSPACE:
@@ -245,10 +279,10 @@ while running:
                             raise SystemExit
                         if event.type == pygame.KEYDOWN:
                             if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
-                                print("DEBUG: Input= "+Input)
-                                print("DEBUG: Text= "+Text)
+                                dprint("DEBUG: Input= "+Input)
+                                dprint("DEBUG: Text= "+Text)
                                 if Input == Text:
-                                    print("DEBUG: Match")
+                                    dprint("DEBUG: Match")
                                     Match = True
                                     Punkte += 1
                                     ding.play()
@@ -257,18 +291,18 @@ while running:
                                 Input = Input[:-1]
                             elif event.key == pygame.K_ESCAPE:
                                 start_time = start_time-Duration_time
-                                print("DEBUG: Escape")
+                                dprint("DEBUG: Escape")
                             elif event.key == pygame.K_RCTRL:
                                 CTRL[0] = True
                                 CTRL[1] = float(time())
-                                print("DEBUG: CTRL")
+                                dprint("DEBUG: CTRL")
                             elif CTRL[0]:
                                 if CTRL[1]+1.0 <= float(time()):
                                     CTRL[0] = False
                                 if event.key == pygame.K_INSERT and CTRL[0]:
                                     Match = True
                                     CTRL[0] = False
-                                    print("DEBUG: Skipped")
+                                    dprint("DEBUG: Skipped")
                             else:
                                 if input_active:
                                     if (not event.key == pygame.K_BACKSPACE and event.unicode and not Backspace) or len(Input)==0:
@@ -286,10 +320,10 @@ while running:
                                         döp.play()
                                     Backspace = True
                             if len(Text)<=10 and int(Level)<18:
-                                print("DEBUG: Input= " + Input)
-                                print("DEBUG: Text= " + Text)
+                                dprint("DEBUG: Input= " + Input)
+                                dprint("DEBUG: Text= " + Text)
                                 if Input == Text:
-                                    print("DEBUG: Match")
+                                    dprint("DEBUG: Match")
                                     Match = True
                                     Punkte += 1
                                     ding.play()
@@ -373,6 +407,6 @@ while running:
     pygame.display.flip()
 
 # Quit Pygame
-print("DEBUG: End Programm")
+dprint("DEBUG: End Programm")
 pygame.quit()
 raise SystemExit
