@@ -10,20 +10,21 @@ dark_mode = args.dark_mode
 print("Made by xxxb. All rights reserved.\n##################################\n")
 
 from random import choice
-from time import time
+from time import time, sleep
 import pygame
 from pathlib import Path
 from requests import get
 import threading
-
+import webbrowser
 
 # Initialize Pygame
 pygame.init()
 
 Fensterbreite = 1000
 Fensterhöhe = 750
-Version = "v1.1.3"
+Version = "v1.1.0"
 latest_tag = Version
+latest_tag = "v1.1.0"
 # Set up the game window
 screen = pygame.display.set_mode((Fensterbreite, Fensterhöhe), pygame.RESIZABLE | pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
@@ -34,16 +35,19 @@ pygame.display.set_caption("TippX")
 def update_check():
     try:
         # Fetching newest version
-        API_URL = "https://codeberg.org/api/v1/repos/xxxb/TippX/releases"
-        response = get(API_URL, timeout=5)
-        releases = response.json()
-        latest = releases[0]
+        #API_URL = "https://codeberg.org/api/v1/repos/xxxb/TippX/releases"
+        #response = get(API_URL, timeout=5)
+        #releases = response.json()
+        #latest = releases[0]
         global latest_tag
-        latest_tag = latest["tag_name"]
+        global Version
+        #latest_tag = tuple(map(int, latest["tag_name"].lstrip("v").split(".")))
+        latest_tag = tuple(map(int, latest_tag.lstrip("v").split(".")))
+        Version = tuple(map(int, Version.lstrip("v").split(".")))
         if latest_tag > Version:
             print({
                 "neueste Version:": latest_tag,
-                "Veröffentlich am": latest["published_at"],
+                #"Veröffentlich am": latest["published_at"],
             })
         elif latest_tag < Version:
             print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt gerade eine neuere Version.")
@@ -195,7 +199,15 @@ while running:
                 else:
                     text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
-
+            if latest_tag > Version:
+                reset()
+                text = pgprint("Es gibt ein Update. Willst du es jetzt herunterladen?")
+                screen.blit(text, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(
+                    Text.split("\n"))) * i) + text.get_height()) - text.get_height() / 2))
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN and event.key == pygame.K_y:
+                    latest_tag = Version
+                    webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
             pygame.display.flip()
 
     if Stage == 1:
@@ -227,7 +239,15 @@ while running:
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
             text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.SysFont('freesans', 20))
             screen.blit(level, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
-
+            if latest_tag > Version:
+                reset()
+                text = pgprint("Es gibt ein Update. Willst du es jetzt herunterladen?")
+                screen.blit(text, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(
+                    Text.split("\n"))) * i) + text.get_height()) - text.get_height() / 2))
+            for event in pygame.event.get():
+                if event.type==pygame.KEYDOWN and event.key == pygame.K_y:
+                    latest_tag = Version
+                    webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
             pygame.display.flip()
         else:
             Stage += 1
@@ -264,6 +284,14 @@ while running:
                 duration = pgprint("Deine Eingabe: "+Duration, pygame.font.SysFont('freesans', 20), (200, 0, 0))
                 screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
+                if latest_tag > Version:
+                    reset()
+                    text = pgprint("Es gibt ein Update. Willst du es jetzt herunterladen?")
+                    screen.blit(text, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(
+                        Text.split("\n"))) * i) + text.get_height()) - text.get_height() / 2))
+                if pygame.key.get_pressed()[pygame.K_y]:
+                    latest_tag = Version
+                    webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
                 pygame.display.flip()
                 reset()
     elif Stage == 3:
