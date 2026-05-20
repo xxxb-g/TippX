@@ -1,5 +1,7 @@
 # All rights reserved for now.
 from argparse import ArgumentParser
+from asyncio import wait
+
 parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
 parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
 parser.add_argument("--dark_mode", action="store_true", help="aktiviere Dark Mode")
@@ -15,6 +17,7 @@ import pygame
 from pathlib import Path
 from requests import get
 import threading
+import webbrowser
 
 
 # Initialize Pygame
@@ -23,37 +26,45 @@ pygame.init()
 Fensterbreite = 1000
 Fensterhöhe = 750
 Version = "v1.1.3"
-latest_tag = Version
 # Set up the game window
 screen = pygame.display.set_mode((Fensterbreite, Fensterhöhe), pygame.RESIZABLE | pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
 font = pygame.font.SysFont('freesans', 48)
 pygame.display.set_caption("TippX")
-
+UpdateCheckComplete = False
 # Funktionen
+latest_tag = Version
+
 def update_check():
+    global latest_tag
+    global Version
+    global UpdateCheckComplete
+
     try:
-        # Fetching newest version
         API_URL = "https://codeberg.org/api/v1/repos/xxxb/TippX/releases"
-        response = get(API_URL, timeout=5)
+        response = get(API_URL, timeout=30)
         releases = response.json()
+
         latest = releases[0]
-        global latest_tag
+
         latest_tag = latest["tag_name"]
-        if latest_tag > Version:
+
+        current_version = tuple(map(int, Version.lstrip("v").split(".")))
+        newest_version = tuple(map(int, latest_tag.lstrip("v").split(".")))
+
+        if newest_version > current_version:
             print({
                 "neueste Version:": latest_tag,
-                "Veröffentlich am": latest["published_at"],
+                "Veröffentlicht am": latest["published_at"],
             })
-        elif latest_tag < Version:
-            print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt gerade eine neuere Version.")
+
+        elif newest_version < current_version:
+            print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt eine neuere Version.")
+
     except Exception as e:
         print(e)
-        print("""Konnte nicht auf Updates checken. Gründe sind:
-         - kein, zu langsames oder manipuliertes Internet,
-         - Codeberg server sind offline.
-         - etwas, woran ich noch nicht gedacht habe.""")
 
+    UpdateCheckComplete = latest_tag
 threading.Thread(target=update_check, daemon=True).start()
 
 if dark_mode:
@@ -64,11 +75,15 @@ else:
     Hintergrund = (255,240,200)
 
 def reset():
+    # Fenstergröße ermitteln
+    global Fensterbreite, Fensterhöhe
+    Fensterbreite, Fensterhöhe = screen.get_size()
     if Stage <= 2: # Gets called every tick bc my code is spagethi (nevím jak se to píše).
         # Darkmode
         global BLACK
         global Hintergrund
         global anweisung_color
+        global latest_tag
         if dark_mode:
             BLACK = (255, 255, 255)
             Hintergrund = (0, 0, 0)
@@ -77,10 +92,21 @@ def reset():
             BLACK = (1, 1,1)  # Das ist nicht (0,0,0), weil ich das lustig finde. Nicht, weil es eine Bedeutung hätte oder so.
             Hintergrund = (255, 240, 200)
             anweisung_color = (10, 10, 200)
+        # Update
+        if UpdateCheckComplete:
+            while latest_tag > Version:
+                screen.fill(Hintergrund)
+                text = pgprint("Es gibt ein Update. Willst du es jetzt herunterladen? (j/n)")
+                screen.blit(text, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height()) - text.get_height() / 2))
+                for event in pygame.event.get():
+                    if event.type==pygame.KEYDOWN:
+                        if event.key == pygame.K_y:
+                            latest_tag = Version
+                            webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
+                        elif event.key == pygame.K_n:
+                            latest_tag = Version
+                pygame.display.flip()
     screen.fill(Hintergrund)
-    # Fenstergröße ermitteln
-    global Fensterbreite, Fensterhöhe
-    Fensterbreite, Fensterhöhe = screen.get_size()
 def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (-1,-2,-3)):
     if color == (-1,-2,-3):
         global BLACK
