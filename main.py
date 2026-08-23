@@ -1,6 +1,5 @@
 # All rights reserved for now.
 from argparse import ArgumentParser
-from asyncio import wait
 
 parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
 parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
@@ -18,7 +17,8 @@ from pathlib import Path
 from requests import get
 import threading
 import webbrowser
-
+import platform
+import subprocess
 
 # Initialize Pygame
 pygame.init()
@@ -34,6 +34,55 @@ pygame.display.set_caption("TippX")
 UpdateCheckComplete = False
 # Funktionen
 latest_tag = Version
+
+def popup(message, title="Bestätigung"):
+    system = platform.system()
+
+    if system == "Linux":
+        try:
+            result = subprocess.run(
+                [
+                    "zenity",
+                    "--question",
+                    f"--title={title}",
+                    f"--text={message}",
+                    "--ok-label=Ja",
+                    "--cancel-label=Nein",
+                ],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception as e:
+            print("Folgender Fehler trat auf: "+ str(e))
+            raise RuntimeError("Folgender Fehler trat auf:"+str(e))
+
+        return result.returncode == 0
+
+    elif system == "Windows":
+        import ctypes
+        result = ctypes.windll.user32.MessageBoxW(
+            0,
+            message,
+            title,
+            4 | 32,  # MB_YESNO | MB_ICONQUESTION
+        )
+        return result == 6  # 6 = Ja, 7 = Nein
+    elif system == "Darwin":
+        # macOS über AppleScript.
+        script = f'''
+display dialog "{message.replace('"', '\\"')}" with title "{title.replace('"', '\\"')}" buttons {{"Nein", "Ja"}} default button "Ja"
+'''
+
+        result = subprocess.run(
+            ["osascript", "-e", script],
+            capture_output=True,
+            text=True,
+        )
+
+        return "button returned:Ja" in result.stdout
+
+    else:
+        raise RuntimeError(f"Nicht unterstütztes Betriebssystem: {system}")
 
 def update_check():
     global latest_tag
@@ -84,6 +133,7 @@ def reset():
         global Hintergrund
         global anweisung_color
         global latest_tag
+        global UpdateCheckComplete
         if dark_mode:
             BLACK = (255, 255, 255)
             Hintergrund = (0, 0, 0)
@@ -93,19 +143,17 @@ def reset():
             Hintergrund = (255, 240, 200)
             anweisung_color = (10, 10, 200)
         # Update
-        if UpdateCheckComplete:
-            while latest_tag > Version:
-                screen.fill(Hintergrund)
-                text = pgprint("Es gibt ein Update. Willst du es jetzt herunterladen? (j/n)")
-                screen.blit(text, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height()) - text.get_height() / 2))
-                for event in pygame.event.get():
-                    if event.type==pygame.KEYDOWN:
-                        if event.key == pygame.K_y:
-                            latest_tag = Version
-                            webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
-                        elif event.key == pygame.K_n:
-                            latest_tag = Version
-                pygame.display.flip()
+        if UpdateCheckComplete and Stage<=2:
+            updaten = popup("Es ist ein Update verfügbar. Willst du es herunterladen?", "Update")
+            while UpdateCheckComplete:
+                if updaten:
+                    latest_tag = Version
+                    webbrowser.open("https://codeberg.org/xxxb/TippX/releases/latest")
+                    UpdateCheckComplete = False
+                elif not updaten:
+                    UpdateCheckComplete= False
+                else:
+                    time.sleep(0.01)
     screen.fill(Hintergrund)
 def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (-1,-2,-3)):
     if color == (-1,-2,-3):
