@@ -29,7 +29,7 @@ Version = "v1.1.3"
 # Set up the game window
 screen = pygame.display.set_mode((Fensterbreite, Fensterhöhe), pygame.RESIZABLE | pygame.DOUBLEBUF)
 clock = pygame.time.Clock()
-font = pygame.font.SysFont('freesans', 48)
+font = pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48)
 pygame.display.set_caption("TippX")
 UpdateCheckComplete = False
 # Funktionen
@@ -155,7 +155,7 @@ def reset():
                 else:
                     time.sleep(0.01)
     screen.fill(Hintergrund)
-def pgprint(text, font=pygame.font.SysFont('freesans', 48), color = (-1,-2,-3)):
+def pgprint(text, font=pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), color = (-1,-2,-3)):
     if color == (-1,-2,-3):
         global BLACK
         color = BLACK
@@ -263,11 +263,11 @@ while running:
             Text = f"TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nAm Anfang legst du ein Level und eine Zeit fest.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Auswertung.\n\nDu kannst mit:\n- Escape: Abbrechen\n- D: Dark Mode umschalten (im Menü)\n- M: Richtig-Geräusch stummschalten {mute}\n- Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
-                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), (200, 100, 0))
+                    text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 40), (200, 100, 0))
                 elif i == len(Text.split("\n")) - 1:
-                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 40), anweisung_color)
+                    text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 40), anweisung_color)
                 else:
-                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+                    text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
 
             pygame.display.flip()
@@ -291,15 +291,15 @@ while running:
                     else:
                         if input_active:
                             Level += event.unicode
-            level = pgprint("Deine Eingabe: "+Level, pygame.font.SysFont('freesans', 20), (200, 0, 0))
+            level = pgprint("Deine Eingabe: "+Level, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
             reset()
             Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus allen vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)\n20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)\n\nWelches Level möchtest du trainieren? "
             for i in range(len(Text.split("\n"))):
-                text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20))
+                text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
                 if i == len(Text.split("\n")) - 1:
-                    text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20), anweisung_color)
+                    text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), anweisung_color)
                 screen.blit(text, (Fensterbreite/10, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
-            text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.SysFont('freesans', 20))
+            text = pgprint(Text.split("\n")[len(Text.split("\n"))-1], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
             screen.blit(level, (Fensterbreite / 10, ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
 
             pygame.display.flip()
@@ -310,7 +310,7 @@ while running:
     elif Stage == 2:
         Text = "Wie viele Minuten lang möchtest du trainieren?"
         for i in range(len(Text.split("\n"))):
-            text = pgprint(Text.split("\n")[i], pygame.font.SysFont('freesans', 20), anweisung_color)
+            text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), anweisung_color)
             screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
         input_active = True
         while input_active:
@@ -335,8 +335,8 @@ while running:
                         else:
                             if input_active:
                                 Duration += event.unicode
-                duration = pgprint("Deine Eingabe: "+Duration, pygame.font.SysFont('freesans', 20), (200, 0, 0))
-                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans',20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                duration = pgprint("Deine Eingabe: "+Duration, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
+                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"),20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                 pygame.display.flip()
                 reset()
@@ -402,26 +402,26 @@ while running:
                                     Punkte += 1
                                     ding.play()
                                     Input = ''
-                                text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                                text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                             else:
-                                text = pgprint(Text+chr(0x21B5), pygame.font.SysFont('freesans', 30))
+                                text = pgprint(Text+"⏎", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                     if len(Text)<=10 and int(Level)<18:
-                        text = pgprint(Text, pygame.font.SysFont('freesans', 30))
+                        text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                     else:
-                        text = pgprint(Text + chr(0x21B5), pygame.font.SysFont('freesans', 30))
-                    input = pgprint("Deine Eingabe: "+Input+("|" if int((time() - start_time) * 2) % 2 == 0 else ""), pygame.font.SysFont('freesans', 30), (200, 0, 0))
-                    if pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
-                        text = pgprint(Text, pygame.font.SysFont('freesans', 20))
-                        input = pgprint("Deine Eingabe: " + Input, pygame.font.SysFont('freesans', 20), (200, 0, 0))
-                        screen.blit(input, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.SysFont('freesans', 20),(200, 0, 0)).get_width(),((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                        text = pgprint(Text + "⏎", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
+                    input = pgprint("Deine Eingabe: "+Input+("|" if int((time() - start_time) * 2) % 2 == 0 else ""), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0))
+                    if pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
+                        text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
+                        input = pgprint("Deine Eingabe: " + Input, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
+                        screen.blit(input, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20),(200, 0, 0)).get_width(),((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                     else:
-                        screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.SysFont('freesans', 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                        screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
-            punkte = pgprint("Punkte: " + str(Punkte), pygame.font.SysFont('freesans', 48), (40, 190, 40))
-            fehler = pgprint("Fehler: " + str(Fehler), pygame.font.SysFont('freesans', 48), (140, 5, 5))
+            punkte = pgprint("Punkte: " + str(Punkte), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (40, 190, 40))
+            fehler = pgprint("Fehler: " + str(Fehler), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (140, 5, 5))
             duration = pgprint("Länge: " + str(Duration) + " Minuten")
             ApM = pgprint("Anschläge/Minute: " + str((float(Punkte)) / float(Duration)))
             Score = 0 if round(((float(Punkte - 10 * Fehler) / float(Duration)))) <= 0 else round(
@@ -441,7 +441,7 @@ while running:
             while Stage == 3:
                 reset()
                 dest[1] = dest_zero[1] - 5.2 * punkte.get_height()
-                screen.blit(pgprint(Titel, pygame.font.SysFont('freesans', 55)), dest)
+                screen.blit(pgprint(Titel, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 55)), dest)
                 dest[1] = dest_zero[1] - 4 * punkte.get_height()
                 screen.blit(score, dest)
                 dest[1] = dest_zero[1] - 3 * punkte.get_height()
