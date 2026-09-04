@@ -106,14 +106,15 @@ def update_check():
                 "neueste Version:": latest_tag,
                 "Veröffentlicht am": latest["published_at"],
             })
+            UpdateCheckComplete = True
 
         elif newest_version < current_version:
             print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt eine neuere Version.")
-
+            UpdateCheckComplete = False
+        elif newest_version == current_version:
+            UpdateCheckComplete = False
     except Exception as e:
         print(e)
-
-    UpdateCheckComplete = latest_tag
 threading.Thread(target=update_check, daemon=True).start()
 
 if dark_mode:
