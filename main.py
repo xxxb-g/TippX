@@ -269,7 +269,7 @@ while running:
                             ding.set_volume(0)
                             mute = _("(stummgeschaltet)")
             reset()
-            Text = _("TippX") + "\n\n" + _("Willkommen zu TippX!") + "\n" + _("Dies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.") + "\n" + _("Am Anfang legst du ein Level und eine Zeit fest.") + "\n" + _("Danach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.") + "\n" + _("Am Ende erscheint eine Auswertung.") + "\n\n" + _("Du kannst mit:") + "\n" + _("- Escape: Abbrechen") + "\n" + _("- D: Dark Mode umschalten (im Menü)") + "\n" + _("- M: Richtig-Geräusch stummschalten {mute}").format(mute=mute) + "\n" + _("- Enter: Eingabe bestätigen.") + "\n" + _("Drücke Enter, um fortzufahren.")
+            Text = "TippX" + "\n\n" + _("Willkommen zu TippX!") + "\n" + _("Dies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.") + "\n" + _("Am Anfang legst du ein Level und eine Zeit fest.") + "\n" + _("Danach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.") + "\n" + _("Am Ende erscheint eine Auswertung.") + "\n\n" + _("Du kannst mit:") + "\n" + _("- Escape: Abbrechen") + "\n" + _("- D: Dark Mode umschalten (im Menü)") + "\n" + _("- M: Richtig-Geräusch stummschalten {mute}").format(mute=mute) + "\n" + _("- Enter: Eingabe bestätigen.") + "\n" + _("Drücke Enter, um fortzufahren.")
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 40), (200, 100, 0))
