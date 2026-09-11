@@ -8,3 +8,5 @@ dist
 build
 TippX.exe.spec
 /TippX.spec
+*.mo
+*.deb
