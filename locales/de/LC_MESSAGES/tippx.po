@@ -1,0 +1,224 @@
+# German translations for TippX.
+# Copyright (C) 2026 xxxb
+# This file is distributed under the same license as the TippX package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TippX 1.1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-11 15:23+0200\n"
+"PO-Revision-Date: 2026-09-11 15:23+0200\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:10
+msgid "Ein Programm, um das deutsche Zehnfinger-Schreibsystem zu trainieren."
+msgstr "Ein Programm, um das deutsche Zehnfinger-Schreibsystem zu trainieren."
+
+#: main.py:11
+msgid "Debugging-Nachrichten zeigen"
+msgstr "Debugging-Nachrichten zeigen"
+
+#: main.py:12
+msgid "aktiviere Dark Mode"
+msgstr "aktiviere Dark Mode"
+
+#: main.py:44
+msgid "Bestätigung"
+msgstr "Bestätigung"
+
+#: main.py:55 main.py:79
+msgid "Ja"
+msgstr "Ja"
+
+#: main.py:56 main.py:78
+msgid "Nein"
+msgstr "Nein"
+
+#: main.py:62 main.py:63
+msgid "Folgender Fehler trat auf: "
+msgstr "Folgender Fehler trat auf: "
+
+#: main.py:93
+msgid "Nicht unterstütztes Betriebssystem: "
+msgstr "Nicht unterstütztes Betriebssystem: "
+
+#: main.py:114
+msgid "neueste Version:"
+msgstr "neueste Version:"
+
+#: main.py:115
+msgid "Veröffentlicht am"
+msgstr "Veröffentlicht am"
+
+#: main.py:120
+#, python-brace-format
+msgid "Neuster offizieller Tag: {tag}. Du nutzt eine neuere Version."
+msgstr "Neuster offizieller Tag: {tag}. Du nutzt eine neuere Version."
+
+#: main.py:156
+msgid "Es ist ein Update verfügbar. Willst du es herunterladen?"
+msgstr "Es ist ein Update verfügbar. Willst du es herunterladen?"
+
+#: main.py:156
+msgid "Update"
+msgstr "Update"
+
+#: main.py:214 main.py:267 main.py:268
+msgid "(laut)"
+msgstr "(laut)"
+
+#: main.py:265 main.py:270
+msgid "(stummgeschaltet)"
+msgstr "(stummgeschaltet)"
+
+#: main.py:272
+msgid "TippX"
+msgstr "TippX"
+
+#: main.py:272
+msgid "Willkommen zu TippX!"
+msgstr "Willkommen zu TippX!"
+
+#: main.py:272
+msgid "Dies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem."
+msgstr "Dies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem."
+
+#: main.py:272
+msgid "Am Anfang legst du ein Level und eine Zeit fest."
+msgstr "Am Anfang legst du ein Level und eine Zeit fest."
+
+#: main.py:272
+msgid ""
+"Danach erscheinen Wortgruppen, die du so schnell und richtig wie möglich "
+"abtippst."
+msgstr ""
+"Danach erscheinen Wortgruppen, die du so schnell und richtig wie möglich "
+"abtippst."
+
+#: main.py:272
+msgid "Am Ende erscheint eine Auswertung."
+msgstr "Am Ende erscheint eine Auswertung."
+
+#: main.py:272
+msgid "Du kannst mit:"
+msgstr "Du kannst mit:"
+
+#: main.py:272
+msgid "- Escape: Abbrechen"
+msgstr "- Escape: Abbrechen"
+
+#: main.py:272
+msgid "- D: Dark Mode umschalten (im Menü)"
+msgstr "- D: Dark Mode umschalten (im Menü)"
+
+#: main.py:272
+#, python-brace-format
+msgid "- M: Richtig-Geräusch stummschalten {mute}"
+msgstr "- M: Richtig-Geräusch stummschalten {mute}"
+
+#: main.py:272
+msgid "- Enter: Eingabe bestätigen."
+msgstr "- Enter: Eingabe bestätigen."
+
+#: main.py:272
+msgid "Drücke Enter, um fortzufahren."
+msgstr "Drücke Enter, um fortzufahren."
+
+#: main.py:303 main.py:347 main.py:348 main.py:421 main.py:422 main.py:424
+#: main.py:425 main.py:427
+msgid "Deine Eingabe: "
+msgstr "Deine Eingabe: "
+
+#: main.py:305
+msgid "ÜBERSICHT LEVEL:"
+msgstr "ÜBERSICHT LEVEL:"
+
+#: main.py:305
+msgid "Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!"
+msgstr "Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!"
+
+#: main.py:305
+msgid " 1: Grundstellung"
+msgstr " 1: Grundstellung"
+
+#: main.py:305
+msgid " 6: Shift Taste"
+msgstr " 6: Shift Taste"
+
+#: main.py:305
+msgid "15: häufige Sonderzeichen"
+msgstr "15: häufige Sonderzeichen"
+
+#: main.py:305
+msgid "16: Ziffern"
+msgstr "16: Ziffern"
+
+#: main.py:305
+msgid "17: Weitere Sonderzeichen"
+msgstr "17: Weitere Sonderzeichen"
+
+#: main.py:305
+msgid "18: Alle Zeichen"
+msgstr "18: Alle Zeichen"
+
+#: main.py:305
+msgid "19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)"
+msgstr "19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)"
+
+#: main.py:305
+msgid "20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)"
+msgstr "20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)"
+
+#: main.py:305
+msgid "Welches Level möchtest du trainieren? "
+msgstr "Welches Level möchtest du trainieren? "
+
+#: main.py:320
+msgid "Wie viele Minuten lang möchtest du trainieren?"
+msgstr "Wie viele Minuten lang möchtest du trainieren?"
+
+#: main.py:432
+msgid "Punkte: "
+msgstr "Punkte: "
+
+#: main.py:433
+msgid "Fehler: "
+msgstr "Fehler: "
+
+#: main.py:434
+msgid "Länge: "
+msgstr "Länge: "
+
+#: main.py:434
+msgid "Minuten"
+msgstr "Minuten"
+
+#: main.py:435
+msgid "Anschläge/Minute: "
+msgstr "Anschläge/Minute: "
+
+#: main.py:440
+msgid "Drücke Enter, um nochmal zu spielen."
+msgstr "Drücke Enter, um nochmal zu spielen."
+
+#: main.py:440
+msgid "Drücke Escape, um zu beenden."
+msgstr "Drücke Escape, um zu beenden."
+
+#: main.py:441
+msgid "Auswertung"
+msgstr "Auswertung"
+
+#: main.py:442
+#, python-brace-format
+msgid "Dein bisheriger Highscore: {score}"
+msgstr "Dein bisheriger Highscore: {score}"
+
+#: main.py:442
+msgid "Das ist ein neuer Highscore!"
+msgstr "Das ist ein neuer Highscore!"

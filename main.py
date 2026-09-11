@@ -1,9 +1,15 @@
 # All rights reserved for now.
 from argparse import ArgumentParser
+import gettext
+from pathlib import Path as _Path
 
-parser = ArgumentParser(prog="TippX", description="Ein Programm, um das deutsche Zehnfiger-Schreibsystem zu trainieren.")
-parser.add_argument("--debug", action="store_true", help="Debugging Nachrichten zeigen")
-parser.add_argument("--dark_mode", action="store_true", help="aktiviere Dark Mode")
+_localedir = _Path(_Path(__file__).parent, "locales")
+_translation = gettext.translation("tippx", localedir=_localedir, fallback=True)
+_ = _translation.gettext
+
+parser = ArgumentParser(prog="TippX", description=_("Ein Programm, um das deutsche Zehnfinger-Schreibsystem zu trainieren."))
+parser.add_argument("--debug", action="store_true", help=_("Debugging-Nachrichten zeigen"))
+parser.add_argument("--dark_mode", action="store_true", help=_("aktiviere Dark Mode"))
 args = parser.parse_args()
 # globale Variable setzen
 debugging = args.debug
@@ -35,7 +41,7 @@ UpdateCheckComplete = False
 # Funktionen
 latest_tag = Version
 
-def popup(message, title="Bestätigung"):
+def popup(message, title=_("Bestätigung")):
     system = platform.system()
 
     if system == "Linux":
@@ -46,15 +52,15 @@ def popup(message, title="Bestätigung"):
                     "--question",
                     f"--title={title}",
                     f"--text={message}",
-                    "--ok-label=Ja",
-                    "--cancel-label=Nein",
+                    "--ok-label=" + _("Ja"),
+                    "--cancel-label=" + _("Nein"),
                 ],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )
         except Exception as e:
-            print("Folgender Fehler trat auf: "+ str(e))
-            raise RuntimeError("Folgender Fehler trat auf:"+str(e))
+            print(_("Folgender Fehler trat auf: ")+ str(e))
+            raise RuntimeError(_("Folgender Fehler trat auf: ")+str(e))
 
         return result.returncode == 0
 
@@ -69,8 +75,10 @@ def popup(message, title="Bestätigung"):
         return result == 6  # 6 = Ja, 7 = Nein
     elif system == "Darwin":
         # macOS über AppleScript.
+        nein_label = _("Nein")
+        ja_label = _("Ja")
         script = f'''
-display dialog "{message.replace('"', '\\"')}" with title "{title.replace('"', '\\"')}" buttons {{"Nein", "Ja"}} default button "Ja"
+display dialog "{message.replace('"', '\\"')}" with title "{title.replace('"', '\\"')}" buttons {{"{nein_label}", "{ja_label}"}} default button "{ja_label}"
 '''
 
         result = subprocess.run(
@@ -79,10 +87,10 @@ display dialog "{message.replace('"', '\\"')}" with title "{title.replace('"', '
             text=True,
         )
 
-        return "button returned:Ja" in result.stdout
+        return f"button returned:{ja_label}" in result.stdout
 
     else:
-        raise RuntimeError(f"Nicht unterstütztes Betriebssystem: {system}")
+        raise RuntimeError(_("Nicht unterstütztes Betriebssystem: ") + system)
 
 def update_check():
     global latest_tag
@@ -103,13 +111,13 @@ def update_check():
 
         if newest_version > current_version:
             print({
-                "neueste Version:": latest_tag,
-                "Veröffentlicht am": latest["published_at"],
+                _("neueste Version:"): latest_tag,
+                _("Veröffentlicht am"): latest["published_at"],
             })
             UpdateCheckComplete = True
 
         elif newest_version < current_version:
-            print(f"Neuster offizieller Tag: {latest_tag}. Du nutzt eine neuere Version.")
+            print(_("Neuster offizieller Tag: {tag}. Du nutzt eine neuere Version.").format(tag=latest_tag))
             UpdateCheckComplete = False
         elif newest_version == current_version:
             UpdateCheckComplete = False
@@ -145,7 +153,7 @@ def reset():
             anweisung_color = (10, 10, 200)
         # Update
         if UpdateCheckComplete and Stage<=2:
-            updaten = popup("Es ist ein Update verfügbar. Willst du es herunterladen?", "Update")
+            updaten = popup(_("Es ist ein Update verfügbar. Willst du es herunterladen?"), _("Update"))
             while UpdateCheckComplete:
                 if updaten:
                     latest_tag = Version
@@ -203,7 +211,7 @@ CTRL = [False, time()]
 pygame.mixer.init()
 ding = pygame.mixer.Sound(Path(Path(__file__).parent, "Ding.wav"))
 döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
-mute = "(laut)"
+mute = _("(laut)")
 döp.set_volume(0.21)
 clock.tick(500)
 Sätze = [["falls", "kalk", "saal", "dallas", "als", "klös", "alaska", "das", "las", "kafka", "öl", "aal", "fkk", "kajak", "lass das", "fass", "alfa", "salsa", "fall"],
@@ -254,14 +262,14 @@ while running:
                     elif event.key == pygame.K_d:
                         dark_mode = not dark_mode
                     elif event.key == pygame.K_m:
-                        if mute == "(stummgeschaltet)":
+                        if mute == _("(stummgeschaltet)"):
                             ding.set_volume(1)
-                            mute = "(laut)"
-                        elif mute == "(laut)":
+                            mute = _("(laut)")
+                        elif mute == _("(laut)"):
                             ding.set_volume(0)
-                            mute = "(stummgeschaltet)"
+                            mute = _("(stummgeschaltet)")
             reset()
-            Text = f"TippX\n\nWillkommen zu TippX!\nDies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.\nAm Anfang legst du ein Level und eine Zeit fest.\nDanach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.\nAm Ende erscheint eine Auswertung.\n\nDu kannst mit:\n- Escape: Abbrechen\n- D: Dark Mode umschalten (im Menü)\n- M: Richtig-Geräusch stummschalten {mute}\n- Enter: Eingabe bestätigen.\nDrücke Enter, um fortzufahren."
+            Text = _("TippX") + "\n\n" + _("Willkommen zu TippX!") + "\n" + _("Dies ist ein Trainer für das deutsche Zehnfinger-Schreibsystem.") + "\n" + _("Am Anfang legst du ein Level und eine Zeit fest.") + "\n" + _("Danach erscheinen Wortgruppen, die du so schnell und richtig wie möglich abtippst.") + "\n" + _("Am Ende erscheint eine Auswertung.") + "\n\n" + _("Du kannst mit:") + "\n" + _("- Escape: Abbrechen") + "\n" + _("- D: Dark Mode umschalten (im Menü)") + "\n" + _("- M: Richtig-Geräusch stummschalten {mute}").format(mute=mute) + "\n" + _("- Enter: Eingabe bestätigen.") + "\n" + _("Drücke Enter, um fortzufahren.")
             for i in range(len(Text.split("\n"))):
                 if Text.split("\n")[i] == "TippX":
                     text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 40), (200, 100, 0))
@@ -292,9 +300,9 @@ while running:
                     else:
                         if input_active:
                             Level += event.unicode
-            level = pgprint("Deine Eingabe: "+Level, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
+            level = pgprint(_("Deine Eingabe: ")+Level, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
             reset()
-            Text = "ÜBERSICHT LEVEL:\nJedes Level beinhaltet alle Zeichen aus allen vorherigen Level!\n 1: Grundstellung\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n 6: Shift Taste\n 7: g,G,.,:\n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n15: häufige Sonderzeichen(!'()_)\n16: Ziffern\n17: Weitere Sonderzeichen (@€%#*<>=&$§~|"+r"\"" +")\n18: Alle Zeichen\n19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)\n20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)\n\nWelches Level möchtest du trainieren? "
+            Text = _("ÜBERSICHT LEVEL:") + "\n" + _("Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!") + "\n" + _(" 1: Grundstellung") + "\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n" + _(" 6: Shift Taste") + "\n 7: g,G,.,:  \n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n" + _("15: häufige Sonderzeichen") + "(!'()_)\n" + _("16: Ziffern") + "\n" + _("17: Weitere Sonderzeichen") + " (@€%#*<>=&$§~|"+r"\"" +")\n" + _("18: Alle Zeichen") + "\n" + _("19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)") + "\n" + _("20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)") + "\n\n" + _("Welches Level möchtest du trainieren? ")
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
                 if i == len(Text.split("\n")) - 1:
@@ -309,7 +317,7 @@ while running:
             dprint("DEBUG: Level="+str(Level))
 
     elif Stage == 2:
-        Text = "Wie viele Minuten lang möchtest du trainieren?"
+        Text = _("Wie viele Minuten lang möchtest du trainieren?")
         for i in range(len(Text.split("\n"))):
             text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), anweisung_color)
             screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
@@ -336,8 +344,8 @@ while running:
                         else:
                             if input_active:
                                 Duration += event.unicode
-                duration = pgprint("Deine Eingabe: "+Duration, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
-                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"),20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                duration = pgprint(_("Deine Eingabe: ")+Duration, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
+                screen.blit(duration, (Fensterbreite / 2 - text.get_width() / 2 - pgprint(_("Deine Eingabe: "),pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"),20),(200, 0, 0)).get_width(), ((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                 screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                 pygame.display.flip()
                 reset()
@@ -410,28 +418,28 @@ while running:
                         text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                     else:
                         text = pgprint(Text + "⏎", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
-                    input = pgprint("Deine Eingabe: "+Input+("|" if int((time() - start_time) * 2) % 2 == 0 else ""), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0))
-                    if pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
+                    input = pgprint(_("Deine Eingabe: ")+Input+("|" if int((time() - start_time) * 2) % 2 == 0 else ""), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0))
+                    if pgprint(_("Deine Eingabe: "),pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30),(200, 0, 0)).get_width()*2+text.get_width()> Fensterbreite:
                         text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
-                        input = pgprint("Deine Eingabe: " + Input, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
-                        screen.blit(input, (Fensterbreite / 2 - text.get_width() / 2 - pgprint("Deine Eingabe: ",pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20),(200, 0, 0)).get_width(),((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
+                        input = pgprint(_("Deine Eingabe: ") + Input, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
+                        screen.blit(input, (Fensterbreite / 2 - text.get_width() / 2 - pgprint(_("Deine Eingabe: "),pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20),(200, 0, 0)).get_width(),((((Fensterhöhe - text.get_height()) / len(Text.split("\n"))) * i) + text.get_height() * 2) - text.get_height() / 2))
                     else:
-                        screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint("Deine Eingabe: ", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
+                        screen.blit(input,  (Fensterbreite/2 - text.get_width()/2 - pgprint(_("Deine Eingabe: "), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30), (200, 0, 0)).get_width(), ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()*2) - text.get_height()/2))
                     screen.blit(text, (Fensterbreite/2 - text.get_width()/2, ((((Fensterhöhe-text.get_height())/len(Text.split("\n")))*i)+text.get_height()) - text.get_height()/2))
                     pygame.display.flip()
                     reset()
         if float(start_time)+float(Duration_time) <= float(time()):
-            punkte = pgprint("Punkte: " + str(Punkte), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (40, 190, 40))
-            fehler = pgprint("Fehler: " + str(Fehler), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (140, 5, 5))
-            duration = pgprint("Länge: " + str(Duration) + " Minuten")
-            ApM = pgprint("Anschläge/Minute: " + str((float(Punkte)) / float(Duration)))
+            punkte = pgprint(_("Punkte: ") + str(Punkte), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (40, 190, 40))
+            fehler = pgprint(_("Fehler: ") + str(Fehler), pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 48), (140, 5, 5))
+            duration = pgprint(_("Länge: ") + str(Duration) + " " + _("Minuten"))
+            ApM = pgprint(_("Anschläge/Minute: ") + str((float(Punkte)) / float(Duration)))
             Score = 0 if round(((float(Punkte - 10 * Fehler) / float(Duration)))) <= 0 else round(
                     ((float(Punkte - 10 * Fehler) / float(Duration))) - (
                         0.01 if dark_mode else 0)) # Das Punkteabziehen ist nur als Spaß und hat keine Auswirkung, aber ich mag halt darkmode nicht. Aber es hat keine Auswirkung auf irgendwas und ist somit nicht diskriminierend.
             score = pgprint("Score: " + str(Score))
-            Text = "\n\nDrücke Enter, um nochmal zu spielen.\nDrücke Escape, um zu beenden."
-            Titel = "Auswertung"
-            Highscore = pgprint(f"Dein bisheriger Highscore: {highscore}" if Score <= int(highscore) else "Das ist ein neuer Highscore!")
+            Text = "\n\n" + _("Drücke Enter, um nochmal zu spielen.") + "\n" + _("Drücke Escape, um zu beenden.")
+            Titel = _("Auswertung")
+            Highscore = pgprint(_("Dein bisheriger Highscore: {score}").format(score=highscore) if Score <= int(highscore) else _("Das ist ein neuer Highscore!"))
             dest_zero = (Fensterbreite / 10, Fensterhöhe / 2)
             if not Score < int(highscore):
                 file = open(".highscore.txt", "w")
