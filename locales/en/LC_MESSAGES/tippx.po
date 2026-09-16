@@ -141,7 +141,6 @@ msgstr "LEVEL OVERVIEW:"
 #: main.py:305
 msgid "Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!"
 msgstr "Each level includes all characters from all previous levels!"
-
 #: main.py:305
 msgid " 1: Grundstellung"
 msgstr " 1: Home row"
