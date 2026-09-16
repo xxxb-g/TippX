@@ -1,0 +1,173 @@
+[
+  {
+    "name": "Home row (a, s, d, f, j, k, l, ;)",
+    "sentences": [
+      "all",
+      "fall",
+      "ask",
+      "flask",
+      "lad",
+      "salad",
+      "lass",
+      "sad",
+      "dads",
+      "alas",
+      "glad",
+      "flak",
+      "kafka",
+      "alfalfa",
+      "falls",
+      "asks"
+    ]
+  },
+  {
+    "name": "e, h",
+    "sentences": [
+      "she led the deer to the lake",
+      "he held a leaf in his hand",
+      "feed the eel and see the fish",
+      "see the fell and feel the heat",
+      "she sells fresh kale at the shed",
+      "he sees a seal head east"
+    ]
+  },
+  {
+    "name": "i, r",
+    "sentences": [
+      "the red bird flies in the dark air",
+      "she said their ride is fair and fine",
+      "fair ladies ride horses in the field",
+      "their fire is dark and dire",
+      "a friend in need is a friend indeed",
+      "rain fell hard in the river side"
+    ]
+  },
+  {
+    "name": "t, o",
+    "sentences": [
+      "the little toad sat on the old stone",
+      "to start the motor turn the key to the right",
+      "she told stories to the little children",
+      "the total cost of the short trip is ten dollars",
+      "take time to look at the sunset",
+      "often the shortest road is the fastest"
+    ]
+  },
+  {
+    "name": "n, g",
+    "sentences": [
+      "the young singer sang a long song",
+      "nothing can stop the green growth in spring",
+      "getting strong and standing tall is great",
+      "going along the raging river taking things easy",
+      "learning to type without looking is fun",
+      "good morning to everyone standing here"
+    ]
+  },
+  {
+    "name": "c, m, .",
+    "sentences": [
+      "Come home soon. The meal is almost ready.",
+      "Many cats climb tall trees in summer.",
+      "Music makes common men feel calm.",
+      "Make each moment count for something good.",
+      "Modern machines make communication simple.",
+      "Come and see the magic of the morning light."
+    ]
+  },
+  {
+    "name": "v, b, p",
+    "sentences": [
+      "A brave boy paved the private path by the river.",
+      "Peter picked a basket of purple berries.",
+      "Every public building provides basic provisions.",
+      "Bright blue butterflies fly above the valley.",
+      "Please provide a proper plan before proceeding.",
+      "The vibrant vibe brought peace to people."
+    ]
+  },
+  {
+    "name": "w, u, y",
+    "sentences": [
+      "Why would you worry when the world is wide and wonderful?",
+      "Young men and women study why yellow flowers bloom.",
+      "You will walk with your friends on sunny pathways.",
+      "We were wishing you well wherever you went.",
+      "Every year you try your best to succeed.",
+      "Yellow waves wash away the warm sand."
+    ]
+  },
+  {
+    "name": "x, z, q",
+    "sentences": [
+      "The quick brown fox jumps over the lazy dog.",
+      "Exact sizing is required for the crazy puzzle.",
+      "Quiet breezes swept across the zero zone.",
+      "Extra zinc and quartz make strong fixtures.",
+      "Examine the question before quizzes begin.",
+      "Equal size squares squeeze into the box."
+    ]
+  },
+  {
+    "name": "Numbers (0-9)",
+    "sentences": [
+      "There are 365 days in a year and 24 hours in a day.",
+      "Flight 747 lands on runway 28 at 14:30.",
+      "In 1969 humans landed on the moon for the 1st time.",
+      "Room 404 is on the 4th floor of building 12.",
+      "Add 15 and 85 to get exactly 100.",
+      "Call 911 in an emergency or 555-0199 for info."
+    ]
+  },
+  {
+    "name": "Punctuation & Common Symbols (!, ?, \", ', -, :)",
+    "sentences": [
+      "\"Wait!\" she called out, \"Is that really true?\"",
+      "Don't give up - success is just around the corner!",
+      "What did he say? Did he ask: \"Who is there?\"",
+      "\"Life is 10% what happens and 90% how you react!\"",
+      "It's easy: practice daily, stay calm, and keep typing.",
+      "\"Hello, world!\" is the programmer's greeting."
+    ]
+  },
+  {
+    "name": "Advanced Symbols (@, #, $, %, &, *, <, >, =)",
+    "sentences": [
+      "Price = 20 > 0 with a 15% discount & no tax.",
+      "Send an email to user@example.com with ref #42.",
+      "Formula: a < b means a is strictly less than b.",
+      "Total = (item_price * quantity) + shipping_fee.",
+      "Check ticket #1024; balance = 50.00 & 5% reward.",
+      "Tags: #coding #python #speed #typing & #gaming"
+    ]
+  },
+  {
+    "name": "All Characters (Full Sentences & Literature)",
+    "sentences": [
+      "To be, or not to be, that is the question.",
+      "All that glitters is not gold; often have you heard that told.",
+      "In the beginning was the Word, and the Word was with God.",
+      "Knowledge is power, but practice makes perfect!",
+      "The journey of a thousand miles begins with a single step.",
+      "Beauty is truth, truth beauty,-that is all ye know on earth."
+    ]
+  },
+  {
+    "name": "Numpad (Digits & Arithmetic)",
+    "require_enter": true,
+    "sentences": [
+      "13574962805",
+      "1142+8623",
+      "9849*2104",
+      "5530/3661",
+      "100*1.19",
+      "22988.35/119*100",
+      "66.72+47.76",
+      "0.046*33",
+      "24-9+1000",
+      "91/12-6.53",
+      "54+900/16",
+      "1.11694+5.736"
+    ]
+  }
+]

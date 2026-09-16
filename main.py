@@ -215,17 +215,17 @@ döp = pygame.mixer.Sound(Path(Path(__file__).parent, "Doeng.mp3"))
 mute = _("(laut)")
 döp.set_volume(0.21)
 clock.tick(500)
-def load_sentences():
+def load_levels():
     lang = _translation.info().get("language")
     if lang:
-        lang_file = _localedir / lang / "sentences.json"
+        lang_file = _localedir / lang / "levels.json"
         if lang_file.is_file():
             try:
                 with open(lang_file, "r", encoding="utf-8") as f:
                     return json.load(f)
             except Exception as e:
                 dprint("Fehler beim Laden von " + str(lang_file) + ": " + str(e))
-    fallback_file = _localedir / "de" / "sentences.json"
+    fallback_file = _localedir / "de" / "levels.json"
     if fallback_file.is_file():
         try:
             with open(fallback_file, "r", encoding="utf-8") as f:
@@ -234,7 +234,8 @@ def load_sentences():
             dprint("Fehler beim Laden von " + str(fallback_file) + ": " + str(e))
     return []
 
-Sätze = load_sentences()
+Levels = load_levels()
+Sätze = [lvl["sentences"] for lvl in Levels]
 
 # Game loop
 running = True
@@ -290,7 +291,7 @@ while running:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                         if Level.isdigit():
-                            if int(Level) > 0 and int(Level) <= len(Sätze):
+                            if int(Level) > 0 and int(Level) <= len(Levels):
                                 input_active = False
                     elif event.key == pygame.K_BACKSPACE:
                         Level = Level[:-1]
@@ -303,7 +304,8 @@ while running:
                             Level += event.unicode
             level = pgprint(_("Deine Eingabe: ")+Level, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20), (200, 0, 0))
             reset()
-            Text = _("ÜBERSICHT LEVEL:") + "\n" + _("Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!") + "\n" + _(" 1: Grundstellung") + "\n 2: e,n\n 3: r,i\n 4: t,h\n 5: c,u\n" + _(" 6: Shift Taste") + "\n 7: g,G,.,:  \n 8: o,O,m,M\n 9: b,B,w,W\n10: z,Z\n11: v,V,p,P\n12: ü,Ü,ä,Ä\n13: ß,?,q,Q\n14: y,Y,x,X,-,/\n" + _("15: häufige Sonderzeichen") + "(!'()_)\n" + _("16: Ziffern") + "\n" + _("17: Weitere Sonderzeichen") + " (@€%#*<>=&$§~|"+r"\"" +")\n" + _("18: Alle Zeichen") + "\n" + _("19: Ziffernblock 1 (Ziffern auf dem Ziffernblock)") + "\n" + _("20: Ziffernblock 2 (Rechnen mit dem Ziffernblock)") + "\n\n" + _("Welches Level möchtest du trainieren? ")
+            level_lines = [f"{idx:2d}: {lvl['name']}" for idx, lvl in enumerate(Levels, start=1)]
+            Text = _("ÜBERSICHT LEVEL:") + "\n" + _("Jedes Level beinhaltet alle Zeichen aus allen vorherigen Level!") + "\n" + "\n".join(level_lines) + "\n\n" + _("Welches Level möchtest du trainieren? ")
             for i in range(len(Text.split("\n"))):
                 text = pgprint(Text.split("\n")[i], pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 20))
                 if i == len(Text.split("\n")) - 1:
@@ -356,7 +358,9 @@ while running:
             while input_active and not float(start_time)+float(Duration_time) <= float(time()):
                 Match = False
                 Backspace = False
-                Text = str(choice(Sätze[int(Level)-1]))
+                current_level = Levels[int(Level)-1]
+                Text = str(choice(current_level["sentences"]))
+                require_enter = current_level.get("require_enter", len(Text) > 10)
                 while not float(start_time)+float(Duration_time) <= float(time()) and input_active and not Match:
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
@@ -403,7 +407,7 @@ while running:
                                         Fehler += 1
                                         döp.play()
                                     Backspace = True
-                            if len(Text)<=10 and int(Level)<18:
+                            if not require_enter:
                                 dprint("DEBUG: Input= " + Input)
                                 dprint("DEBUG: Text= " + Text)
                                 if Input == Text:
@@ -415,7 +419,7 @@ while running:
                                 text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                             else:
                                 text = pgprint(Text+"⏎", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
-                    if len(Text)<=10 and int(Level)<18:
+                    if not require_enter:
                         text = pgprint(Text, pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
                     else:
                         text = pgprint(Text + "⏎", pygame.font.Font(Path(Path(__file__).parent, "xxxb-Font.otf"), 30))
